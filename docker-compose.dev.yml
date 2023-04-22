@@ -1,0 +1,45 @@
+services:
+  # backend:
+  #   image: backend-dev
+  #   build:
+  #     context: .
+  #     dockerfile: dev.Dockerfile
+  #   container_name: backend-dev
+  #   volumes:
+  #     - type: bind
+  #       source: .
+  #       target: /usr/src/app
+ 
+  db:
+    image: postgres:14
+    container_name: postgres
+    hostname: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: city_bike_db
+    volumes:
+      # - ./postgres-data:/var/lib/postgresql/data
+      - ./db/:/docker-entrypoint-initdb.d/
+      - ./db/files:/files
+  
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+
+  # nginx:
+  #   image: nginx:1.20.1
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #   ports:
+  #     - 8080:80
+  #   container_name: reverse-proxy
+  #   depends_on:
+  #     - backend
