@@ -21,10 +21,14 @@ jobs:
         run: npm install
       - name: Install frontend dependencies
         run: npm --prefix ./front-end install
-      - name: Check style
-        run: npm run eslint
-      - name: Run Build
+      - name: Check backend style
+        run: npm run lint
+      - name: Check frontend style
+        run: npm --prefix ./front-end run lint
+      - name: Run Backend Build
         run: npm run build
+      - name: Run Frontend Build
+        run: npm --prefix ./front-end run build
       # - name: Build Failed
       #   uses: rjstone/discord-webhook-notify@v1
       #   if: failure()
@@ -38,8 +42,8 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
-          start: npm run start-prod
-          wait-on: http://localhost:5000
+          start: npm run start
+          wait-on: http://localhost:3000
       
   deploy_and_tag_release:
     permissions: write-all
