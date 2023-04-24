@@ -1,2 +1,4 @@
 node_modules
 build
+front-end/build
+front-end/node_modules

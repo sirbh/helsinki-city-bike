@@ -16,4 +16,15 @@ export default defineConfig({
         // since parsing CSS is slow
         css: true,
     },
+    server: {
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                changeOrigin: true,
+            },
+        },
+    },
+    build: {
+        outDir: 'build',
+    },
 });

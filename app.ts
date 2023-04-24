@@ -4,12 +4,13 @@ const app = express();
 
 app.use(morgan('tiny'));
 app.use(express.json());
+app.use(express.static('build'));
 
 
 
-app.get('/ping', (_req, res) => {
+app.get('/api/info', (_req, res) => {
   console.log('someone pinged here');
-  res.status(200).send('pong pong');
+  res.status(200).send(`helsinki city bike api ${new Date()}`);
 });
 
 export default app;

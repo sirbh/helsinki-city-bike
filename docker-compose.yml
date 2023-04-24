@@ -1,0 +1,10 @@
+services:
+  backend:
+    image: backend-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend-dev
+    ports:
+      - 3000:3000
+ 

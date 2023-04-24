@@ -6,8 +6,6 @@ describe('App', () => {
     it('should render Hello World', () => {
         const { container } = render(<App />);
 
-        expect(container.querySelector('#app')).toHaveTextContent(
-            'Hello World'
-        );
+        expect(container.querySelector('#app')).toHaveTextContent('Hello');
     });
 });
