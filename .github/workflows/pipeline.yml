@@ -20,7 +20,7 @@ jobs:
       - name: Install backend dependencies
         run: npm install
       - name: Install frontend dependencies
-        run: npm npm --prefix ./front-end install
+        run: npm --prefix ./front-end install
       - name: Check style
         run: npm run eslint
       - name: Run Build
