@@ -11,8 +11,8 @@
     "test": "jest",
     "build:ui": "rm -rf build && cd front-end && npm run build && cp -r build ../",
     "cypress:open": "cypress open",
-    "test:e2e":"cypress run",
-    "build":"npm run tsc && npm run build:ui"
+    "test:e2e": "cypress run",
+    "build": "npm run tsc && npm run build:ui"
   },
   "author": "saurabh chauhan",
   "license": "MIT",
@@ -26,6 +26,7 @@
     "cypress": "^12.10.0",
     "eslint": "^8.38.0",
     "eslint-config-standard-with-typescript": "^34.0.1",
+    "eslint-plugin-cypress": "^2.13.2",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-n": "^15.7.0",
     "eslint-plugin-promise": "^6.1.1",
