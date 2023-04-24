@@ -25,10 +25,8 @@ jobs:
         run: npm run lint
       - name: Check frontend style
         run: npm --prefix ./front-end run lint
-      - name: Run Backend Build
+      - name: Run Build
         run: npm run build
-      - name: Run Frontend Build
-        run: npm --prefix ./front-end run build
       # - name: Build Failed
       #   uses: rjstone/discord-webhook-notify@v1
       #   if: failure()
