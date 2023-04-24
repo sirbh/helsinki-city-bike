@@ -9,7 +9,6 @@ app.use(express.static('build'));
 
 
 app.get('/api/info', (_req, res) => {
-  console.log('someone pinged here');
   res.status(200).send(`helsinki city bike api ${new Date()}`);
 });
 

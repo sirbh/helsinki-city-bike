@@ -4,8 +4,8 @@ import app from '../app';
 
 const api = supertest(app);
 
-test('if /ping respond with 200',async ()=>{
+test('if /api/info respond with 200',async ()=>{
   await api.get('/ping')
            .expect(200)
-           .expect('pong');
+           .expect(`helsinki city bike api ${new Date()}`);
 });
