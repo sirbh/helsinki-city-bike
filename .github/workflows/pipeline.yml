@@ -17,8 +17,9 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: Install dependencies
+      - name: Install backend dependencies
         run: npm install
+      - name: Install frontend dependencies
         run: npm npm --prefix ./front-end install
       - name: Check style
         run: npm run eslint
