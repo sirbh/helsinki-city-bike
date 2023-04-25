@@ -1,4 +1,4 @@
-# fly.toml file generated for helsinki-city-bike on 2023-04-24T23:16:14+03:00
+# fly.toml file generated for helsinki-city-bike on 2023-04-25T23:11:50+03:00
 
 app = "helsinki-city-bike"
 kill_signal = "SIGINT"
@@ -6,14 +6,7 @@ kill_timeout = 5
 primary_region = "arn"
 processes = []
 
-[deploy]
-  release_command = "npm run build"
-
-[processes]
-  app = "node dist/index.js"
-
 [env]
-  PORT = "3000"
 
 [experimental]
   auto_rollback = true
