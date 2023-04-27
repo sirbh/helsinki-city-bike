@@ -1,5 +1,6 @@
 name: Deployment pipeline
-
+env:
+  NAME: 'test'
 on:
   push:
     branches:
