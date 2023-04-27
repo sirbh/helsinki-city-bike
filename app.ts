@@ -1,5 +1,6 @@
 import express from 'express';
 import morgan from 'morgan';
+import journeyRouter from './controllers/journeys';
 const app = express();
 
 app.use(morgan('tiny'));
@@ -8,7 +9,8 @@ app.use(express.static('build'));
 
 
 
-app.get('/api/info', (_req, res) => {
+app.use('/api/journeys',journeyRouter);
+app.get('/api/info', (req, res) => {
   res.status(200).send(`helsinki city bike api ${new Date()}`);
 });
 
