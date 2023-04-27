@@ -36,6 +36,8 @@ jobs:
       #     details: Error at ${{github.event.commits[0].url}}
       #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Run Tests
+        env:
+          DATABASE_URL: postgres://xhxtlfbs:YcPu4KH7TlfwDopgvbU00QATXJsVRxU6@balarama.db.elephantsql.com/xhxtlfbs
         run: npm run test
       - name: e2e tests
         uses: cypress-io/github-action@v5
