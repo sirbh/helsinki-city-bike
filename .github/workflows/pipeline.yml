@@ -37,11 +37,11 @@ jobs:
       #     webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Run Tests
         env:
-          DATABASE_URL: postgres://xhxtlfbs:YcPu4KH7TlfwDopgvbU00QATXJsVRxU6@balarama.db.elephantsql.com/xhxtlfbs
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: npm run test
       - name: e2e tests
         env:
-          DATABASE_URL: postgres://xhxtlfbs:YcPu4KH7TlfwDopgvbU00QATXJsVRxU6@balarama.db.elephantsql.com/xhxtlfbs
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         uses: cypress-io/github-action@v5
         with:
           command: npm run test:e2e
