@@ -5,7 +5,7 @@ import { jourenyRequestValidators } from '../../util/validators';
 
 const journeyRouter = Router();
 
-journeyRouter.get('/',ValidateJourneyRequest,(req,res)=>{
+journeyRouter.get('/',ValidateJourneyRequest,(req,res,next)=>{
     
     const {take,page} = jourenyRequestValidators.cast(req.query);
     db.journeys.findMany({
@@ -13,8 +13,8 @@ journeyRouter.get('/',ValidateJourneyRequest,(req,res)=>{
         skip:take*(page-1)
     }).then(resp=>{
         return res.status(200).send(resp);
-    }).catch(_e=>{
-        return res.status(400).send('something went wrong');
+    }).catch(e=>{
+        next(e);
     });
     
 });
