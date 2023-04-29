@@ -1,11 +1,17 @@
 import {Router} from 'express';
 import {db} from '../../prisma';
+import { ValidateJourneyRequest } from '../../middlewares';
+import { jourenyRequestValidators } from '../../util/validators';
 
 const journeyRouter = Router();
 
-journeyRouter.get('/',(req,res)=>{
-    db.journeys.findMany().then(resp=>{
-        console.log(resp);
+journeyRouter.get('/',ValidateJourneyRequest,(req,res)=>{
+    
+    const {take,page} = jourenyRequestValidators.cast(req.query);
+    db.journeys.findMany({
+        take:take,
+        skip:take*(page-1)
+    }).then(resp=>{
         return res.status(200).send(resp);
     }).catch(e=>{
         console.log(e);
