@@ -13,8 +13,7 @@ journeyRouter.get('/',ValidateJourneyRequest,(req,res)=>{
         skip:take*(page-1)
     }).then(resp=>{
         return res.status(200).send(resp);
-    }).catch(e=>{
-        console.log(e);
+    }).catch(_e=>{
         return res.status(400).send('something went wrong');
     });
     
