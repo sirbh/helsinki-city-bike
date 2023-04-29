@@ -47,13 +47,12 @@ test('if get journey api gives records equal to "take" with all property defined
 test('if we can sort journeys by duration', async ()=>{
   const response = await api.get("/api/journeys?page=1&take=5&property=duration&order=asc");
   const journeys_resp = response.body as JourneysSchema[];
-
   const durationArray = journeys_resp.map(journey=>journey.duration);
+
   const copy_journeys = [...journeys];
   copy_journeys.sort((a,b)=>a.duration-b.duration);
   const expectedDurationArray = copy_journeys.map(journey=>journey.duration).slice(0,5);
-  console.log(durationArray);
-  console.log(expectedDurationArray);
+
   expect(durationArray).toEqual(expectedDurationArray);
 });
 
@@ -62,6 +61,7 @@ test('if we can sort journeys by covered_distance', async ()=>{
   const journeys_resp = response.body as JourneysSchema[];
 
   const testArray = journeys_resp.map(journey=>journey.covered_distance);
+  
   const copy_journeys = [...journeys];
   copy_journeys.sort((a,b)=>a.covered_distance-b.covered_distance);
   const expectedArray = copy_journeys.map(journey=>journey.covered_distance.toString()).slice(0,5);
