@@ -2,13 +2,20 @@ import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
 import { jourenyRequestValidators } from "../util/validators";
 
 
+
 export const ValidateJourneyRequest = (req:Request,_res:Response,next:NextFunction) => {
     jourenyRequestValidators.validate({
         take:req.query.take,
-        page:req.query.page
+        page:req.query.page,
+        sortBy:{
+            property:req.query.property,
+            order:req.query.order
+        }
     }).then(_result=>{
+        console.log(_result);
         next();
     }).catch(err=>{
+        console.log(err);
         next(err);
     });
 };
