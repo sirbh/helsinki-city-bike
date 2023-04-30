@@ -1,4 +1,4 @@
-import { object, number, mixed } from "yup";
+import { object, number, mixed, string } from "yup";
 
 export const jourenyRequestValidators = object({
   take: number().required("property take is required").positive().integer(),
@@ -35,4 +35,8 @@ export const jourenyRequestValidators = object({
 export const stationRequestValidators = object({
   take: number().required("property take is required").positive().integer(),
   page: number().required("property page is required").integer().positive(),
+});
+
+export const stationsSearchValidator = object({
+   query:string().required()
 });

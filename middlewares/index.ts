@@ -1,5 +1,5 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
-import { jourenyRequestValidators, stationRequestValidators } from "../util/validators";
+import { jourenyRequestValidators, stationRequestValidators, stationsSearchValidator } from "../util/validators";
 
 export const ValidateJourneyRequest = (
   req: Request,
@@ -38,6 +38,23 @@ export const ValidateStationsRequest = (
     .validate({
       take: req.query.take,
       page: req.query.page,
+    })
+    .then((_result) => {
+      next();
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+export const VlidateStationSearchRequest = (
+  req: Request,
+  _res: Response,
+  next: NextFunction
+) => {
+  stationsSearchValidator
+    .validate({
+      query: req.query.query,
     })
     .then((_result) => {
       next();
