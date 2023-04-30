@@ -38,5 +38,5 @@ export const stationRequestValidators = object({
 });
 
 export const stationsSearchValidator = object({
-   query:string().required()
+   query:string().required("property query is required")
 });
