@@ -22,11 +22,9 @@ export const ValidateJourneyRequest = (
         : undefined,
     })
     .then((_result) => {
-      console.log(_result);
       next();
     })
     .catch((err) => {
-      console.log(err);
       next(err);
     });
 };
@@ -42,11 +40,9 @@ export const ValidateStationsRequest = (
       page: req.query.page,
     })
     .then((_result) => {
-      console.log(_result);
       next();
     })
     .catch((err) => {
-      console.log(err);
       next(err);
     });
 };

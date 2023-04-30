@@ -17,7 +17,6 @@ stationsRouter.get("/", ValidateStationsRequest, (req, res, next) => {
       skip: take * (page - 1),
     })
     .then((resp) => {
-      console.log(resp);
       return res.status(200).send(resp);
     })
     .catch((e) => {
