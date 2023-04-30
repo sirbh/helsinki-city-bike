@@ -68,3 +68,45 @@ test('if we can sort journeys by covered_distance', async ()=>{
 
   expect(testArray).toEqual(expectedArray);
 });
+
+test('if we can sort journeys by departure_station_name', async ()=>{
+  const response = await api.get("/api/journeys?page=1&take=5&property=departure_station_name&order=asc");
+  const journeys_resp = response.body as JourneysSchema[];
+
+  const testArray = journeys_resp.map(journey=>journey.departure_station_name);
+  
+  const copy_journeys = [...journeys];
+  copy_journeys.sort((a,b)=>{
+    if(a.departure_station_name<b.departure_station_name){
+      return -1;
+    }
+    else if(a.departure_station_name>b.departure_station_name){
+      return 1;
+    }
+    else return 0;
+  });
+  const expectedArray = copy_journeys.map(journey=>journey.departure_station_name).slice(0,5);
+
+  expect(testArray).toEqual(expectedArray);
+});
+
+test('if we can sort journeys by return_station_name', async ()=>{
+  const response = await api.get("/api/journeys?page=1&take=5&property=return_station_name&order=asc");
+  const journeys_resp = response.body as JourneysSchema[];
+
+  const testArray = journeys_resp.map(journey=>journey.return_station_name);
+  
+  const copy_journeys = [...journeys];
+  copy_journeys.sort((a,b)=>{
+    if(a.return_station_name<b.return_station_name){
+      return -1;
+    }
+    else if(a.return_station_name>b.return_station_name){
+      return 1;
+    }
+    else return 0;
+  });
+  const expectedArray = copy_journeys.map(journey=>journey.return_station_name).slice(0,5);
+
+  expect(testArray).toEqual(expectedArray);
+});
