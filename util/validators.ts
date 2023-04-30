@@ -23,4 +23,11 @@ export const jourenyRequestValidators = object({
       .required()
       .default("asc"),
   }).required(),
+  filterBy: object({
+    property: mixed<"departure_station_id" | "return_station_id">()
+      .oneOf(["departure_station_id", "return_station_id"])
+      .required()
+      .default("departure_station_id"),
+    id: number().required().integer().positive(),
+  }).default(undefined),
 });
