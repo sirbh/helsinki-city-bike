@@ -31,3 +31,8 @@ export const jourenyRequestValidators = object({
     id: number().required().integer().positive(),
   }).default(undefined),
 });
+
+export const stationRequestValidators = object({
+  take: number().required("property take is required").positive().integer(),
+  page: number().required("property page is required").integer().positive(),
+});
