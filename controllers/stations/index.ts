@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { db } from "../../prisma";
-import { ValidateStationsRequest } from "../../middlewares";
-import { stationRequestValidators } from "../../util/validators";
+import { ValidateStationsRequest, VlidateStationSearchRequest } from "../../middlewares";
+import { stationRequestValidators, stationsSearchValidator } from "../../util/validators";
 
 const stationsRouter = Router();
 
@@ -15,6 +15,28 @@ stationsRouter.get("/", ValidateStationsRequest, (req, res, next) => {
     .findMany({
       take: take,
       skip: take * (page - 1),
+    })
+    .then((resp) => {
+      return res.status(200).send(resp);
+    })
+    .catch((e) => {
+      next(e);
+    });
+});
+
+stationsRouter.get("/search",VlidateStationSearchRequest,(req, res, next) => {
+  const {query} = stationsSearchValidator.cast({
+    query:req.query.query
+  });
+
+  db.stations
+    .findMany({
+      where:{
+        name:{
+          startsWith:query,
+          mode:'insensitive'
+        } 
+      }
     })
     .then((resp) => {
       return res.status(200).send(resp);
