@@ -13,8 +13,8 @@ function Journeys() {
     <JourneyTable
       count={data?.count ? data.count : 0}
       page={page}
-      pageChangeHandler={() => {
-        setPage((prev_page) => prev_page + 1);
+      pageChangeHandler={(page) => {
+        setPage(page);
       }}
       tableData={data?.details ? data.details : []}
       take={take}
