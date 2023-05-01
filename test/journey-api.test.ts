@@ -30,8 +30,9 @@ test("if journey api throw validation error if property take is missing", async 
 
 test('if get journey api gives records equal to "take" with all property defined', async () => {
   const response = await api.get("/api/journeys?page=1&take=5").expect(200);
-  expect(response.body).toHaveLength(5);
-  const journeys_resp = response.body as JourneysSchema[];
+  expect(response.body.details).toHaveLength(5);
+  expect(response.body.count).toBe(journeys.length);
+  const journeys_resp = response.body.details as JourneysSchema[];
   journeys_resp.forEach((journey) => {
     expect(journey).toHaveProperty("id");
     expect(journey).toHaveProperty("departure_station_id");
@@ -47,7 +48,7 @@ test("if we can sort journeys by duration", async () => {
   const response = await api.get(
     "/api/journeys?page=1&take=5&sort_prop=duration&order=asc"
   );
-  const journeys_resp = response.body as JourneysSchema[];
+  const journeys_resp = response.body.details as JourneysSchema[];
   const durationArray = journeys_resp.map((journey) => journey.duration);
 
   const copy_journeys = [...journeys];
@@ -63,7 +64,7 @@ test("if we can sort journeys by covered_distance", async () => {
   const response = await api.get(
     "/api/journeys?page=1&take=5&sort_prop=covered_distance&order=asc"
   );
-  const journeys_resp = response.body as JourneysSchema[];
+  const journeys_resp = response.body.details as JourneysSchema[];
 
   const testArray = journeys_resp.map((journey) => journey.covered_distance);
 
@@ -80,7 +81,7 @@ test("if we can sort journeys by departure_station_name", async () => {
   const response = await api.get(
     "/api/journeys?page=1&take=5&sort_prop=departure_station_name&order=asc"
   );
-  const journeys_resp = response.body as JourneysSchema[];
+  const journeys_resp = response.body.details as JourneysSchema[];
 
   const testArray = journeys_resp.map(
     (journey) => journey.departure_station_name
@@ -105,7 +106,7 @@ test("if we can sort journeys by return_station_name", async () => {
   const response = await api.get(
     "/api/journeys?page=1&take=5&sort_prop=return_station_name&order=asc"
   );
-  const journeys_resp = response.body as JourneysSchema[];
+  const journeys_resp = response.body.details as JourneysSchema[];
 
   const testArray = journeys_resp.map((journey) => journey.return_station_name);
 
@@ -128,9 +129,11 @@ test("if we can filter journeys by return_station_id", async () => {
   const response = await api.get(
     "/api/journeys?page=1&take=5&sort_prop=return_station_name&order=asc&filter_prop=return_station_id&id=100"
   );
-  const journeys_resp = response.body as JourneysSchema[];
+  const journeys_resp = response.body.details as JourneysSchema[];
 
   const testArray = journeys_resp.map((journey) => journey.return_station_id);
+
+  expect(response.body.count).toBe(journeys.filter(j=>j.return_station_id===100).length);
 
   testArray.forEach((id) => {
     expect(id).toBe(100);
@@ -141,11 +144,13 @@ test("if we can filter journeys by departure_station_id", async () => {
   const response = await api.get(
     "/api/journeys?page=1&take=5&filter_prop=departure_station_id&id=82"
   );
-  const journeys_resp = response.body as JourneysSchema[];
+  const journeys_resp = response.body.details as JourneysSchema[];
 
   const testArray = journeys_resp.map(
     (journey) => journey.departure_station_id
   );
+
+  expect(response.body.count).toBe(journeys.filter(j=>j.departure_station_id===82).length);
 
   testArray.forEach((id) => {
     expect(id).toBe(82);
