@@ -63,7 +63,7 @@ export default function JourneyTable({
         rowsPerPage={take}
         page={page - 1}
         onPageChange={(_e, n) => {
-          pageChangeHandler(n+1);
+          pageChangeHandler(n + 1);
         }}
       />
     </>
