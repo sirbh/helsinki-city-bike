@@ -8,5 +8,4 @@ const router = createBrowserRouter([
     children: [],
   },
 ]);
-
 export default router;
