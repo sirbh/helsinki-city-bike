@@ -35,7 +35,7 @@ journeyRouter.get("/", ValidateJourneyRequest, (async (req, res, next) => {
       db.journeys.findMany({
         take: take,
         skip: take * (page - 1),
-        orderBy: _sortBy,
+        orderBy: [_sortBy, { id: "asc" }],
         where: _where,
       }),
       db.journeys.count({
