@@ -30,7 +30,7 @@ export default function JourneyTable({
           <TableHead>
             <TableRow>
               <TableCell align="left">Departure station</TableCell>
-              <TableCell align="left">Returhn Station</TableCell>
+              <TableCell align="left">Return Station</TableCell>
               <TableCell align="right">Covered Distance&nbsp;(km)</TableCell>
               <TableCell align="right">Duration&nbsp;(mins)</TableCell>
             </TableRow>
