@@ -8,13 +8,12 @@ import Paper from '@mui/material/Paper';
 import { TablePagination } from '@mui/material';
 import { IJourney } from '../../../types';
 
-
 interface ITableProps {
   tableData: IJourney[];
   pageChangeHandler: (n: number) => void;
   page: number;
   count: number;
-  take:number;
+  take: number;
 }
 
 export default function JourneyTable({
@@ -22,7 +21,7 @@ export default function JourneyTable({
   pageChangeHandler,
   page,
   count,
-  take
+  take,
 }: ITableProps) {
   return (
     <>

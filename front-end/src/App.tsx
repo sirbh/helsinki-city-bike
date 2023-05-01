@@ -1,6 +1,6 @@
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import Layout from './components/layout';
 import './App.css';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 function App() {
   const queryClient = new QueryClient();
