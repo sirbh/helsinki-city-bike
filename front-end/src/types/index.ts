@@ -14,3 +14,9 @@ export interface IJourneyAPIResponse {
   count: number;
   details: IJourney[];
 }
+
+export interface ITabsState {
+  name: string;
+  value: string;
+  order: string;
+}
