@@ -1,18 +1,11 @@
 import { expect, test } from "@jest/globals";
 import supertest from "supertest";
 import app from "../app";
-import { db } from "../prisma";
 import { journeys } from "../util/helperdata";
 import { journeys as JourneysSchema } from "@prisma/client";
 
 const api = supertest(app);
 
-beforeEach(async () => {
-  await db.journeys.deleteMany();
-  await db.journeys.createMany({
-    data: journeys,
-  });
-});
 
 test("if journey api throw validation error", async () => {
   await api

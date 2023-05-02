@@ -1,18 +1,10 @@
 import supertest from "supertest";
 import app from "../app";
-import { db } from "../prisma";
-import { stations } from "../util/helperdata";
 import { expect, test } from "@jest/globals";
 import { stations as StationsSchema } from "@prisma/client";
 
 const api = supertest(app);
 
-beforeEach(async () => {
-  await db.stations.deleteMany();
-  await db.stations.createMany({
-    data: stations,
-  });
-});
 
 test("if stations api throw validation error", async () => {
   await api
