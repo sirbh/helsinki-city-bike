@@ -1,9 +1,14 @@
 import axios from 'axios';
 import { IJourneyAPIResponse } from '../types';
 
-const getJourneyDetails = async (page: number, take: number) => {
+const getJourneyDetails = async (
+  page: number,
+  take: number,
+  sortBy: string,
+  order: string
+) => {
   const { data } = await axios.get<IJourneyAPIResponse>(
-    `/api/journeys?page=${page}&take=${take}`
+    `/api/journeys?page=${page}&take=${take}&sort_prop=${sortBy}&order=${order}`
   );
 
   return data;
