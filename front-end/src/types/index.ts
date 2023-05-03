@@ -20,3 +20,13 @@ export interface ITabsState {
   value: string;
   order: string;
 }
+
+export interface ISearchStation {
+  id: number;
+  name: string;
+}
+
+export type SelectOption = {
+  name: string;
+  value: string;
+};
