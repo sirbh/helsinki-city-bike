@@ -1,4 +1,4 @@
-import { Box, LinearProgress, Select } from '@mui/material';
+import { Box, LinearProgress } from '@mui/material';
 import JourneyTable from './table';
 import useJourneyDetails from '../../hooks/useJourneyDetails';
 import Tabs from './tabs';
@@ -35,6 +35,7 @@ function Journeys() {
         <SearchStationInput
           setSelectedOption={(res) => {
             setStationId(res ? res.id.toString() : '');
+            setPage(1);
           }}
         />
         <SelectInput
@@ -54,7 +55,7 @@ function Journeys() {
           ]}
         />
       </Box>
-      <Tabs setOrder={setOrder} setSortBy={setSortBy} />
+      <Tabs setOrder={setOrder} setSortBy={setSortBy} setPage={setPage} />
       {isLoading ? (
         <LinearProgress />
       ) : (

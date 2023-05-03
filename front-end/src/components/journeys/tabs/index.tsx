@@ -6,6 +6,7 @@ import useSortingTabsManager from '../../../hooks/utility/useSortingTabsManager'
 interface ITabsProps {
   setSortBy: (val: string) => void;
   setOrder: (val: string) => void;
+  setPage: (n: number) => void;
 }
 
 function getLabel(order: string) {
@@ -15,7 +16,7 @@ function getLabel(order: string) {
   return <ArrowUpward />;
 }
 
-export default function Tabs({ setOrder, setSortBy }: ITabsProps) {
+export default function Tabs({ setOrder, setSortBy, setPage }: ITabsProps) {
   const { seletedTab, setSelectedTab, setTabsState, tabsState } =
     useSortingTabsManager(setOrder, setSortBy);
   return (
@@ -55,6 +56,7 @@ export default function Tabs({ setOrder, setSortBy }: ITabsProps) {
                 }
                 return prev;
               });
+              setPage(1);
             }}
             endIcon={seletedTab === i ? getLabel(tab.order) : undefined}
             sx={{ marginLeft: '1rem' }}
