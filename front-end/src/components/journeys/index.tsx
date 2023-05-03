@@ -1,16 +1,59 @@
-import { LinearProgress } from '@mui/material';
+import { Box, LinearProgress, Select } from '@mui/material';
 import JourneyTable from './table';
 import useJourneyDetails from '../../hooks/useJourneyDetails';
 import Tabs from './tabs';
+import SearchStationInput from '../station-search';
+import SelectInput from '../select';
 
 function Journeys() {
-  const { data, error, isLoading, page, take, setOrder, setSortBy, setPage } =
-    useJourneyDetails();
+  const {
+    data,
+    error,
+    isLoading,
+    page,
+    take,
+    journeyType,
+    setOrder,
+    setSortBy,
+    setPage,
+    setJourneyType,
+    setStationId,
+  } = useJourneyDetails();
   if (error) {
     return <div>Error</div>;
   }
   return (
     <>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          marginTop: '2rem',
+        }}
+      >
+        <SearchStationInput
+          setSelectedOption={(res) => {
+            setStationId(res ? res.id.toString() : '');
+          }}
+        />
+        <SelectInput
+          handleChange={(v: string) => {
+            setJourneyType(v);
+          }}
+          selectedJourneyType={journeyType}
+          options={[
+            {
+              name: 'Departure',
+              value: 'departure_station_id',
+            },
+            {
+              name: 'Return',
+              value: 'return_station_id',
+            },
+          ]}
+        />
+      </Box>
       <Tabs setOrder={setOrder} setSortBy={setSortBy} />
       {isLoading ? (
         <LinearProgress />
