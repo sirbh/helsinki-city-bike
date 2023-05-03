@@ -37,7 +37,11 @@ stationsRouter.get("/search",VlidateStationSearchRequest,(req, res, next) => {
           mode:'insensitive'
         }
       },
-      take:5
+      take:5,
+      select:{
+        id:true,
+        name:true
+      }
     })
     .then((resp) => {
       return res.status(200).send(resp);
