@@ -1,17 +1,24 @@
 import axios from 'axios';
-import { IJourneyAPIResponse } from '../types';
+import { IJourneyAPIResponse, ISearchStation } from '../types';
 
-const getJourneyDetails = async (
+export const getJourneyDetails = async (
   page: number,
   take: number,
   sortBy: string,
-  order: string
+  order: string,
+  stationId: string,
+  journeyType: string
 ) => {
   const { data } = await axios.get<IJourneyAPIResponse>(
-    `/api/journeys?page=${page}&take=${take}&sort_prop=${sortBy}&order=${order}`
+    `/api/journeys?page=${page}&take=${take}&sort_prop=${sortBy}&order=${order}&filter_prop=${journeyType}&id=${stationId}`
   );
 
   return data;
 };
 
-export default getJourneyDetails;
+export const searchStation = async (query: string) => {
+  const { data } = await axios.get<ISearchStation[]>(
+    `/api/stations/search?query=${query}`
+  );
+  return data;
+};
