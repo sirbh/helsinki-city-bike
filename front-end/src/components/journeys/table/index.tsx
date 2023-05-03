@@ -29,10 +29,30 @@ export default function JourneyTable({
         <Table sx={{ minWidth: 350 }} size="small">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Departure station</TableCell>
-              <TableCell align="left">Return Station</TableCell>
-              <TableCell align="right">Covered Distance&nbsp;(km)</TableCell>
-              <TableCell align="right">Duration&nbsp;(mins)</TableCell>
+              <TableCell
+                align="left"
+                sx={{ fontWeight: 'bold', fontSize: '1rem' }}
+              >
+                Departure station
+              </TableCell>
+              <TableCell
+                align="left"
+                sx={{ fontWeight: 'bold', fontSize: '1rem' }}
+              >
+                Return Station
+              </TableCell>
+              <TableCell
+                align="right"
+                sx={{ fontWeight: 'bold', fontSize: '1rem' }}
+              >
+                Covered Distance&nbsp;(km)
+              </TableCell>
+              <TableCell
+                align="right"
+                sx={{ fontWeight: 'bold', fontSize: '1rem' }}
+              >
+                Duration&nbsp;(mins)
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -47,7 +67,7 @@ export default function JourneyTable({
                   {(row.covered_distance / 1000).toFixed(2)}
                 </TableCell>
                 <TableCell align="right">
-                  {(row.duration / 60).toFixed()}
+                  {(row.duration / 60).toFixed(1)}
                 </TableCell>
               </TableRow>
             ))}
