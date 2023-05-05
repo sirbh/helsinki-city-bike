@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Box, LinearProgress } from '@mui/material';
 import useStationDetails from '../../hooks/useStationDetails';
 import StationTable from './table';
@@ -15,20 +16,14 @@ function Stations() {
           marginTop: '2rem',
         }}
       >
-        <SearchStationInput
-          setSelectedOption={(res) => {
-            console.log(res);
-          }}
-        />
+        <SearchStationInput setSelectedOption={(_res) => {}} />
       </Box>
       {isLoading ? (
         <LinearProgress />
       ) : (
         <StationTable
           count={data?.count || 0}
-          onRowClick={(e) => {
-            console.log(e);
-          }}
+          onRowClick={(_e) => {}}
           page={page}
           pageChangeHandler={(updatedPage) => {
             setPage(updatedPage);
