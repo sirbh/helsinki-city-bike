@@ -1,5 +1,5 @@
 import { ErrorRequestHandler, NextFunction, Request, Response } from "express";
-import { jourenyRequestValidators, stationRequestValidators, stationsSearchValidator } from "../util/validators";
+import { addStationValidators, jourenyRequestValidators, stationRequestValidators, stationsSearchValidator } from "../util/validators";
 
 export const ValidateJourneyRequest = (
   req: Request,
@@ -63,6 +63,14 @@ export const VlidateStationSearchRequest = (
       next(err);
     });
 };
+
+export const ValidateStationAddRequest = (req:Request,_res:Response,next:NextFunction) => {
+     addStationValidators.validate(req.query).then(_result=>{
+      next();
+     }).catch((err)=>{
+      next(err);
+     });
+}; 
 
 export const ErrorHandler: ErrorRequestHandler = (error, _req, _res, _next) => {
   if (error.type === "optionality") {
