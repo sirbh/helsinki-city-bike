@@ -43,6 +43,7 @@ journeyRouter.get("/", ValidateJourneyRequest, (async (req, res, next) => {
       }),
     ]);
 
+
     res.status(200).send({
       count: journeyDetails[1],
       details: journeyDetails[0],
