@@ -35,3 +35,34 @@ export type SelectOption = {
   name: string;
   value: string;
 };
+
+export interface ISingleStationAPIResponse {
+  details: {
+    id: number;
+    name: string;
+    address: string;
+    operator: string;
+    city: string;
+    capacity: number;
+    x: number;
+    y: number;
+  };
+  total_departures: number;
+  total_return: number;
+  avg_departure_distance: number;
+  avg_return_distance: number;
+  popular_departure_stations: {
+    _count: {
+      return_station_id: number;
+    };
+    departure_station_id: number;
+    departure_station_name: string;
+  }[];
+  popular_return_station: {
+    _count: {
+      departure_station_id: number;
+    };
+    return_station_id: number;
+    return_station_name: string;
+  }[];
+}
