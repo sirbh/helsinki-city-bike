@@ -37,7 +37,7 @@ export const getStations = async (page: number, take: number) => {
 
 export const getSingleStation = async (id: string) => {
   const { data } = await axios.get<ISingleStationAPIResponse>(
-    `/api/statios/${id}`
+    `/api/stations/${id}`
   );
   return data;
 };
