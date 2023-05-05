@@ -25,10 +25,10 @@ stationsRouter.get("/", ValidateStationsRequest, (async (req, res, next) => {
       db.stations.findMany({
         take: take,
         skip: take * (page - 1),
-        select: {
-          id: true,
-          name: true,
-        },
+        // select: {
+        //   id: true,
+        //   name: true,
+        // },
       }),
       db.stations.count({}),
     ]);
