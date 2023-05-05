@@ -2,7 +2,7 @@ import { expect, test } from "@jest/globals";
 import supertest from "supertest";
 import app from "../app";
 import { journeys as JourneysSchema } from "@prisma/client";
-import { journeys as journeysHelperData } from "../util/helperData";
+import { journeys as journeysHelperData } from "../util/helperdata";
 
 const api = supertest(app);
 
