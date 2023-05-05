@@ -16,16 +16,14 @@ function Stations() {
   } = useSingleStationDetails();
   return (
     <>
-      {singleStationDetails && (
-        <SingleStationModal
-          open={modalOpen}
-          handleClose={() => {
-            setModalOpen((prev) => !prev);
-          }}
-          loading={singleStationLoading}
-          stationDetails={singleStationDetails}
-        />
-      )}
+      <SingleStationModal
+        open={modalOpen}
+        handleClose={() => {
+          setModalOpen((prev) => !prev);
+        }}
+        loading={singleStationLoading}
+        stationDetails={singleStationDetails}
+      />
 
       <Box
         sx={{

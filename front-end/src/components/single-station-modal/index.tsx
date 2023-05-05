@@ -15,7 +15,7 @@ import Mapview from '../map';
 interface ISingleStationModal {
   open: boolean;
   handleClose: () => void;
-  stationDetails: ISingleStationAPIResponse;
+  stationDetails: ISingleStationAPIResponse | undefined;
   loading: boolean;
 }
 
@@ -36,7 +36,7 @@ function SingleStationModal({
       {!loading ? (
         <Card sx={{ minWidth: '40rem' }}>
           <CardHeader
-            title={`${stationDetails.details.name} Station`}
+            title={`${stationDetails?.details.name} Station`}
             subheader={
               <>
                 <Box
@@ -47,12 +47,16 @@ function SingleStationModal({
                   }}
                 >
                   <Place />
-                  {stationDetails.details.address}
+                  {stationDetails?.details.address}
                 </Box>
                 <Mapview
-                  lat={stationDetails.details.y}
-                  log={stationDetails.details.x}
-                  markerLabel={stationDetails.details.name}
+                  lat={stationDetails?.details.y ? stationDetails.details.y : 0}
+                  log={stationDetails?.details.x ? stationDetails.details.x : 0}
+                  markerLabel={
+                    stationDetails?.details.name
+                      ? stationDetails.details.name
+                      : 'Unknown'
+                  }
                 />
               </>
             }
@@ -63,19 +67,19 @@ function SingleStationModal({
             <Box sx={{ marginRight: '1rem' }}>
               <Typography variant="body2">Total Journeys Started</Typography>
               <Typography variant="h5">
-                {stationDetails.total_departures
+                {stationDetails?.total_departures
                   ? stationDetails.total_departures
                   : 0}
               </Typography>
               <Typography variant="body2">Total Journeys Ended</Typography>
               <Typography variant="h5">
-                {stationDetails.total_return ? stationDetails.total_return : 0}
+                {stationDetails?.total_return ? stationDetails.total_return : 0}
               </Typography>
               <Typography variant="body2">
                 Average Departure Distance
               </Typography>
               <Typography variant="h5">
-                {stationDetails.avg_departure_distance
+                {stationDetails?.avg_departure_distance
                   ? `${(stationDetails.avg_departure_distance / 1000)
                       .toFixed(2)
                       .toString()}km`
@@ -83,7 +87,7 @@ function SingleStationModal({
               </Typography>
               <Typography variant="body2">Average Return Distance</Typography>
               <Typography variant="h5">
-                {stationDetails.avg_return_distance
+                {stationDetails?.avg_return_distance
                   ? `${(stationDetails.avg_return_distance / 1000)
                       .toFixed(2)
                       .toString()}km`
@@ -94,7 +98,7 @@ function SingleStationModal({
               <Typography variant="body2" sx={{ marginBottom: '1rem' }}>
                 Popular Return Station
               </Typography>
-              {stationDetails.popular_return_station.map((station, i) => {
+              {stationDetails?.popular_return_station.map((station, i) => {
                 return (
                   <Typography variant="body1" key={station.return_station_id}>
                     {`${i + 1}. ${station.return_station_name}`}
@@ -106,7 +110,7 @@ function SingleStationModal({
               <Typography variant="body2" sx={{ marginBottom: '1rem' }}>
                 Popular Departure Station
               </Typography>
-              {stationDetails.popular_departure_stations.map((station, i) => {
+              {stationDetails?.popular_departure_stations.map((station, i) => {
                 return (
                   <Typography
                     variant="body1"
