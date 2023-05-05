@@ -3,9 +3,16 @@ import { Box, LinearProgress } from '@mui/material';
 import useStationDetails from '../../hooks/useStationDetails';
 import StationTable from './table';
 import SearchStationInput from '../station-search';
+import useSingleStationDetails from '../../hooks/useSingleStationDetails';
 
 function Stations() {
   const { data, page, isLoading, setPage } = useStationDetails();
+  const {
+    data: singleStationDetails,
+    isLoading: singleStationLoading,
+    setId,
+  } = useSingleStationDetails();
+  console.log(singleStationDetails);
   return (
     <>
       <Box
@@ -23,7 +30,9 @@ function Stations() {
       ) : (
         <StationTable
           count={data?.count || 0}
-          onRowClick={(_e) => {}}
+          onRowClick={(_e) => {
+            setId(_e.id.toString());
+          }}
           page={page}
           pageChangeHandler={(updatedPage) => {
             setPage(updatedPage);
