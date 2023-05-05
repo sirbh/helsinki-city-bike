@@ -26,8 +26,19 @@ export interface ISearchStation {
   name: string;
 }
 
+export interface IStation {
+  id: number;
+  name: string;
+  address: string;
+  operator: string;
+  city: string;
+  capacity: number;
+  x: number;
+  y: number;
+}
+
 export interface IStationAPIResponse {
-  details: ISearchStation[];
+  details: IStation[];
   count: number;
 }
 
@@ -37,16 +48,7 @@ export type SelectOption = {
 };
 
 export interface ISingleStationAPIResponse {
-  details: {
-    id: number;
-    name: string;
-    address: string;
-    operator: string;
-    city: string;
-    capacity: number;
-    x: number;
-    y: number;
-  };
+  details:IStation;
   total_departures: number;
   total_return: number;
   avg_departure_distance: number;

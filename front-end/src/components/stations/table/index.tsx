@@ -5,15 +5,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { TablePagination } from '@mui/material';
-import { ISearchStation } from '../../../types';
+import { TablePagination, Typography } from '@mui/material';
+import { IStation } from '../../../types';
 
 interface ITableProps {
-  tableData: ISearchStation[];
+  tableData: IStation[];
   pageChangeHandler: (n: number) => void;
   page: number;
   count: number;
-  onRowClick: (option: ISearchStation) => void;
+  onRowClick: (option: IStation) => void;
 }
 export default function StationTable({
   tableData,
@@ -34,6 +34,24 @@ export default function StationTable({
               >
                 Station Name
               </TableCell>
+              <TableCell
+                align="left"
+                sx={{ fontWeight: 'bold', fontSize: '1rem' }}
+              >
+                City
+              </TableCell>
+              <TableCell
+                align="left"
+                sx={{ fontWeight: 'bold', fontSize: '1rem' }}
+              >
+                Address
+              </TableCell>
+              <TableCell
+                align="left"
+                sx={{ fontWeight: 'bold', fontSize: '1rem' }}
+              >
+                Capacity
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -44,15 +62,19 @@ export default function StationTable({
               >
                 <TableCell
                   align="left"
-                  onClick={() => onRowClick(row)}
                   sx={{
                     cursor: 'pointer',
                     color: 'blue',
                     textDecoration: 'underline',
                   }}
                 >
-                  {row.name}
+                  <Typography onClick={() => onRowClick(row)}>
+                    {row.name}
+                  </Typography>
                 </TableCell>
+                <TableCell align="left">{row.city}</TableCell>
+                <TableCell align="left">{row.address}</TableCell>
+                <TableCell align="right">{row.capacity}</TableCell>
               </TableRow>
             ))}
           </TableBody>
