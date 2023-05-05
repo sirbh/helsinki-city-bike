@@ -48,7 +48,7 @@ export type SelectOption = {
 };
 
 export interface ISingleStationAPIResponse {
-  details:IStation;
+  details: IStation;
   total_departures: number;
   total_return: number;
   avg_departure_distance: number;
