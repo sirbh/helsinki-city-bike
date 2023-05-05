@@ -68,6 +68,5 @@ export const ErrorHandler: ErrorRequestHandler = (error, _req, _res, _next) => {
   if (error.type === "optionality") {
     return _res.status(403).send(error.message);
   }
-  console.log(error);
   return _res.status(400).send("server could not handle the request");
 };
