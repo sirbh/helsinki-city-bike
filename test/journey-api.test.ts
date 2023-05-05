@@ -1,10 +1,15 @@
-import { expect, test } from "@jest/globals";
+import { afterAll, expect, test } from "@jest/globals";
 import supertest from "supertest";
 import app from "../app";
 import { journeys as JourneysSchema } from "@prisma/client";
 import { journeys as journeysHelperData } from "../util/helperdata";
+import { db } from "../prisma";
 
 const api = supertest(app);
+
+afterAll(async()=>{
+  await db.$disconnect();
+});
 
 test("if journey api throw validation error", async () => {
   await api

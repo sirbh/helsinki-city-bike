@@ -1,6 +1,8 @@
 import { expect } from "@jest/globals";
 import { getAvgDistanceEndingOnStation, getAvgDistanceStartingFromStation, getJourneyEnding, getJourneyStarting, getPopularDepartureStation, getPopularReturnStation, getStationDetailsByID } from "../util/testHelper";
 
+
+
 test('if getStationDetails works as expected',()=>{
     const result = getStationDetailsByID(14);
 

@@ -1,11 +1,15 @@
 import supertest from "supertest";
 import app from "../app";
-import { expect, test } from "@jest/globals";
+import { afterAll, expect, test } from "@jest/globals";
 import { stations as StationsSchema } from "@prisma/client";
 import { stations as stationsHelperData } from "../util/helperdata";
+import { db } from "../prisma";
 
 const api = supertest(app);
 
+afterAll(async()=>{
+  await db.$disconnect();
+});
 
 test("if stations api throw validation error", async () => {
   await api

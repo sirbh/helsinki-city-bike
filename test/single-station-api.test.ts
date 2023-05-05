@@ -1,11 +1,16 @@
 import supertest from "supertest";
 import app from "../app";
 import {stations as StationSchema} from '@prisma/client';
-import { expect } from "@jest/globals";
+import { afterAll, expect } from "@jest/globals";
 import { getAvgDistanceEndingOnStation, getAvgDistanceStartingFromStation, getJourneyEnding, getJourneyStarting, getPopularDepartureStation, getPopularReturnStation, getStationDetailsByID } from "../util/testHelper";
+import { db } from "../prisma";
 
 
 const api = supertest(app);
+
+afterAll(async()=>{
+  await db.$disconnect();
+});
 
 test("if stations api gets station details", async () => {
     const response = await api
