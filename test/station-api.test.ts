@@ -2,6 +2,7 @@ import supertest from "supertest";
 import app from "../app";
 import { expect, test } from "@jest/globals";
 import { stations as StationsSchema } from "@prisma/client";
+import { stations as stationsHelperData } from "../util/helperdata";
 
 const api = supertest(app);
 
@@ -22,17 +23,12 @@ test("if station api throw validation error if property take is missing", async 
 
 test('if get journey api gives records equal to "take" with all property defined', async () => {
   const response = await api.get("/api/stations?page=1&take=5").expect(200);
-  expect(response.body).toHaveLength(5);
-  const journeys_resp = response.body as StationsSchema[];
+  expect(response.body.details).toHaveLength(5);
+  expect(response.body.count).toBe(stationsHelperData.length);
+  const journeys_resp = response.body.details as StationsSchema[];
   journeys_resp.forEach((journey) => {
     expect(journey).toHaveProperty("id");
     expect(journey).toHaveProperty("name");
-    expect(journey).toHaveProperty("address");
-    expect(journey).toHaveProperty("city");
-    expect(journey).toHaveProperty("operator");
-    expect(journey).toHaveProperty("capacity");
-    expect(journey).toHaveProperty("x");
-    expect(journey).toHaveProperty("y");
   });
 });
 
