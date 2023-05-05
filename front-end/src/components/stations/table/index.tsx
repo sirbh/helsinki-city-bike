@@ -74,7 +74,7 @@ export default function StationTable({
                 </TableCell>
                 <TableCell align="left">{row.city}</TableCell>
                 <TableCell align="left">{row.address}</TableCell>
-                <TableCell align="right">{row.capacity}</TableCell>
+                <TableCell align="left">{row.capacity}</TableCell>
               </TableRow>
             ))}
           </TableBody>
