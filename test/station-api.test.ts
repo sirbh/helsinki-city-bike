@@ -21,7 +21,7 @@ test("if station api throw validation error if property take is missing", async 
     .expect("property take is required");
 });
 
-test('if get journey api gives records equal to "take" with all property defined', async () => {
+test('if get stations api gives records equal to "take" with all property defined', async () => {
   const response = await api.get("/api/stations?page=1&take=5").expect(200);
   expect(response.body.details).toHaveLength(5);
   expect(response.body.count).toBe(stationsHelperData.length);
