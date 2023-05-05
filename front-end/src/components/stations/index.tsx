@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Box, LinearProgress } from '@mui/material';
 import { useState } from 'react';
 import useStationDetails from '../../hooks/useStationDetails';
