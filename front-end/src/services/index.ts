@@ -2,6 +2,7 @@ import axios from 'axios';
 import {
   IJourneyAPIResponse,
   ISearchStation,
+  ISingleStationAPIResponse,
   IStationAPIResponse,
 } from '../types';
 
@@ -30,6 +31,13 @@ export const searchStation = async (query: string) => {
 export const getStations = async (page: number, take: number) => {
   const { data } = await axios.get<IStationAPIResponse>(
     `/api/stations?page=${page}&take=${take}`
+  );
+  return data;
+};
+
+export const getSingleStation = async (id: string) => {
+  const { data } = await axios.get<ISingleStationAPIResponse>(
+    `/api/statios/${id}`
   );
   return data;
 };
