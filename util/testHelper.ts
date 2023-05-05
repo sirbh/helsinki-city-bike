@@ -1,4 +1,4 @@
-import { journeys, stations } from "./helperData";
+import { journeys, stations } from "./helperdata";
 
 export const getStationDetailsByID = (id: number) => {
   const station = stations.find((station) => station.id === id);
