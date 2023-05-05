@@ -26,6 +26,11 @@ export interface ISearchStation {
   name: string;
 }
 
+export interface IStationAPIResponse {
+  details: ISearchStation[];
+  count: number;
+}
+
 export type SelectOption = {
   name: string;
   value: string;

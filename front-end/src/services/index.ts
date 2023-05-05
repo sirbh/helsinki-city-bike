@@ -1,5 +1,9 @@
 import axios from 'axios';
-import { IJourneyAPIResponse, ISearchStation } from '../types';
+import {
+  IJourneyAPIResponse,
+  ISearchStation,
+  IStationAPIResponse,
+} from '../types';
 
 export const getJourneyDetails = async (
   page: number,
@@ -19,6 +23,13 @@ export const getJourneyDetails = async (
 export const searchStation = async (query: string) => {
   const { data } = await axios.get<ISearchStation[]>(
     `/api/stations/search?query=${query}`
+  );
+  return data;
+};
+
+export const getStations = async (page: number, take: number) => {
+  const { data } = await axios.get<IStationAPIResponse>(
+    `/api/stations?page=${page}&take=${take}`
   );
   return data;
 };
