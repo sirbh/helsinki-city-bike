@@ -1,13 +1,16 @@
 import { RequestHandler, Router } from "express";
 import { db } from "../../prisma";
 import {
+  ValidateStationAddRequest,
   ValidateStationsRequest,
   VlidateStationSearchRequest,
 } from "../../middlewares";
 import {
+  addStationValidators,
   stationRequestValidators,
   stationsSearchValidator,
 } from "../../util/validators";
+
 
 const stationsRouter = Router();
 
@@ -157,5 +160,16 @@ stationsRouter.get("/:id", (async (req, res, next) => {
   }
 
 }) as RequestHandler);
+
+stationsRouter.post('/',ValidateStationAddRequest,(req,res,next)=>{
+   const stationDetails = addStationValidators.cast(req.query);
+   db.stations.create({
+    data:stationDetails
+   }).then(resp=>{
+     res.status(200).send(resp);
+   }).catch(err=>{
+     next(err);
+   });
+});
 
 export default stationsRouter;
