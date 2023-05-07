@@ -1,7 +1,9 @@
-// import { journeys } from "../../util/helperdata";
-
-// import { journeys } from "../../util/helperdata";
-import { getStationSortedByDeparture, getStationSortedByDistance, getStationSortedByDuration, getStationSortedByReturn } from "../../util/testHelper";
+import {
+  getStationSortedByDeparture,
+  getStationSortedByDistance,
+  getStationSortedByDuration,
+  getStationSortedByReturn,
+} from "../../util/testHelper";
 
 describe("journey table test", () => {
   beforeEach(() => {
@@ -22,9 +24,11 @@ describe("journey table test", () => {
     );
     cy.get("table thead tr th:nth-child(4)").should("contain", "Duration");
   });
+
   it("should have correct number of rows", () => {
     cy.get("table tbody tr").should("have.length", 10);
   });
+
   it("should have the correct content in a specific cell", () => {
     cy.get("table tbody tr:nth-child(2) td:nth-child(1)").should(
       "contain",
@@ -59,8 +63,8 @@ describe("journey table test", () => {
       });
   });
 
-  it("should be sorted by departure station if clicked on the departure station tab",() => {
-    cy.contains('Departure Station').click();
+  it("should be sorted by departure station if clicked on the departure station tab", () => {
+    cy.contains("Departure Station").click();
     cy.get("table tbody tr td")
       .then(($el) => {
         return Cypress._.map($el, "innerText");
@@ -75,8 +79,8 @@ describe("journey table test", () => {
       });
   });
 
-  it("should be sorted by return station if clicked on the return station tab",() => {
-    cy.contains('Return Station').click();
+  it("should be sorted by return station if clicked on the return station tab", () => {
+    cy.contains("Return Station").click();
     cy.get("table tbody tr td")
       .then(($el) => {
         return Cypress._.map($el, "innerText");
@@ -91,10 +95,10 @@ describe("journey table test", () => {
       });
   });
 
-  it("should be sorted by return station in descending order if clicked twice on the return station tab",() => {
-    cy.contains('Return Station').click();
+  it("should be sorted by return station in descending order if clicked twice on the return station tab", () => {
+    cy.contains("Return Station").click();
     cy.wait(1000);
-    cy.contains('Return Station').click();
+    cy.contains("Return Station").click();
     cy.wait(1000);
     cy.get("table tbody tr td")
       .then(($el) => {
@@ -110,8 +114,8 @@ describe("journey table test", () => {
       });
   });
 
-  it("should be sorted by covered distance in ascending order if clicked on the covered distance tab",() => {
-    cy.contains('Covered Distance').click();
+  it("should be sorted by covered distance in ascending order if clicked on the covered distance tab", () => {
+    cy.contains("Covered Distance").click();
     cy.wait(1000);
 
     cy.get("table tbody tr td")
@@ -122,16 +126,16 @@ describe("journey table test", () => {
         const distanceArray = cellDataArray.filter((_d, i) => i % 4 === 2);
         expect(distanceArray).to.deep.equal(
           getStationSortedByDistance("asc")
-            .map((station) => (station.covered_distance/1000).toFixed(2))
+            .map((station) => (station.covered_distance / 1000).toFixed(2))
             .slice(0, 10)
         );
       });
   });
 
-  it("should be sorted by covered distance in descending order if clicked on the covered distance tab twice",() => {
-    cy.contains('Covered Distance').click();
+  it("should be sorted by covered distance in descending order if clicked on the covered distance tab twice", () => {
+    cy.contains("Covered Distance").click();
     cy.wait(1000);
-    cy.contains('Covered Distance').click();
+    cy.contains("Covered Distance").click();
     cy.wait(1000);
 
     cy.get("table tbody tr td")
@@ -142,14 +146,14 @@ describe("journey table test", () => {
         const distanceArray = cellDataArray.filter((_d, i) => i % 4 === 2);
         expect(distanceArray).to.deep.equal(
           getStationSortedByDistance("desc")
-            .map((station) => (station.covered_distance/1000).toFixed(2))
+            .map((station) => (station.covered_distance / 1000).toFixed(2))
             .slice(0, 10)
         );
       });
   });
 
-  it("should be sorted by duration in ascending order if clicked on the duration tab",() => {
-    cy.contains('Duration').click();
+  it("should be sorted by duration in ascending order if clicked on the duration tab", () => {
+    cy.contains("Duration").click();
     cy.wait(1000);
 
     cy.get("table tbody tr td")
@@ -160,16 +164,16 @@ describe("journey table test", () => {
         const durationArray = cellDataArray.filter((_d, i) => i % 4 === 3);
         expect(durationArray).to.deep.equal(
           getStationSortedByDuration("asc")
-            .map((station) => (station.duration/60).toFixed(1))
+            .map((station) => (station.duration / 60).toFixed(1))
             .slice(0, 10)
         );
       });
   });
 
-  it("should be sorted by duration in desceding order if clicked on the duration tab twice",() => {
-    cy.contains('Duration').click();
+  it("should be sorted by duration in desceding order if clicked on the duration tab twice", () => {
+    cy.contains("Duration").click();
     cy.wait(1000);
-    cy.contains('Duration').click();
+    cy.contains("Duration").click();
     cy.wait(1000);
 
     cy.get("table tbody tr td")
@@ -180,10 +184,50 @@ describe("journey table test", () => {
         const durationArray = cellDataArray.filter((_d, i) => i % 4 === 3);
         expect(durationArray).to.deep.equal(
           getStationSortedByDuration("desc")
-            .map((station) => (station.duration/60).toFixed(1))
+            .map((station) => (station.duration / 60).toFixed(1))
             .slice(0, 10)
         );
       });
   });
 
+  it("should show the content according to the value in the search input",()=>{
+    cy.get('input').first().type('aa');
+    cy.wait(500);
+    cy.get('[class^=MuiAutocomplete-popper]').contains('Aalto University (M), Korkeakoulua').click();
+    cy.get('[id=journey-type]').first().click();
+    cy.get('ul li:nth-child(1)').contains('Departure').click();
+    cy.get("table tbody tr td")
+    .then(($el) => {
+      return Cypress._.map($el, "innerText");
+    })
+    .then((cellDataArray) => {
+      const departureStations = cellDataArray.filter((_d, i) => i % 4 === 0);
+      departureStations.forEach(station=>expect(station).equal('Aalto-yliopisto (M), Korkeakouluaukio'));
+    });
+
+
+    cy.get('input').first().type('ba');
+    cy.wait(500);
+    cy.get('[class^=MuiAutocomplete-popper]').contains('Baana').click();
+    cy.get('[id=journey-type]').first().click();
+    cy.get('ul li:nth-child(2)').contains('Return').click();
+    cy.get("table tbody tr td")
+    .then(($el) => {
+      return Cypress._.map($el, "innerText");
+    })
+    .then((cellDataArray) => {
+      const departureStations = cellDataArray.filter((_d, i) => i % 4 === 1);
+      departureStations.forEach(station=>expect(station).equal('Baana'));
+    });
+  });
+
+  it("should be able to change the page when clicked on the arrows",()=>{
+       cy.get('[class^=MuiTablePagination]').contains('1–10 of 19');
+       cy.get('[data-testid=KeyboardArrowRightIcon]').click();
+       cy.wait(500);
+       cy.get('[class^=MuiTablePagination]').contains('11–19 of 19');
+       cy.get('[data-testid=KeyboardArrowLeftIcon]').click();
+       cy.wait(500);
+       cy.get('[class^=MuiTablePagination]').contains('1–10 of 19');
+  });
 });
