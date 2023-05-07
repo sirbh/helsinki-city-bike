@@ -47,4 +47,18 @@ describe("stations table tests", () => {
     cy.wait(500);
     cy.get('[class^=MuiTablePagination]').contains('1–10 of 11');
 });
+
+ it("should show modal when clicked on the station" , ()=>{
+    cy.get("table tbody tr:nth-child(2) td:nth-child(1)").contains('Baana').click();
+    cy.wait(500);
+    cy.get('[class^=MuiModal-root]').find('div').should('have.class','MuiPaper-root');
+ });
+
+ it("should show modal when clicked on the station shown in autocomplete dropdown" , ()=>{
+    cy.get('input').first().type('aa');
+    cy.wait(500);
+    cy.get('[class^=MuiAutocomplete-popper]').contains('Aalto University (M), Korkeakoulua').click();
+    cy.wait(500);
+    cy.get('[class^=MuiModal-root]').find('div').should('have.class','MuiPaper-root');
+ });
 });
