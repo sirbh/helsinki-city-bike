@@ -5,15 +5,20 @@ import StationTable from './table';
 import SearchStationInput from '../station-search';
 import useSingleStationDetails from '../../hooks/useSingleStationDetails';
 import SingleStationModal from '../single-station-modal';
+import Error from '../error';
 
 function Stations() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const { data, page, isLoading, setPage } = useStationDetails();
+  const { data, page, isLoading, setPage, isError } = useStationDetails();
   const {
     data: singleStationDetails,
     isLoading: singleStationLoading,
     setId,
   } = useSingleStationDetails();
+
+  if (isError) {
+    return <Error />;
+  }
   return (
     <>
       <SingleStationModal

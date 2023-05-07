@@ -34,7 +34,17 @@ function SingleStationModal({
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
     >
       {!loading ? (
-        <Card sx={{ minWidth: '40rem' }}>
+        <Card
+          sx={{
+            minWidth: '40rem',
+            ':focus': {
+              outline: 'none',
+            },
+            ':active': {
+              outline: 'none',
+            },
+          }}
+        >
           <CardHeader
             title={`${stationDetails?.details.name} Station`}
             subheader={
@@ -131,6 +141,12 @@ function SingleStationModal({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            ':focus': {
+              outline: 'none',
+            },
+            ':active': {
+              outline: 'none',
+            },
           }}
         >
           <CircularProgress />

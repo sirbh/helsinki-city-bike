@@ -4,6 +4,7 @@ import useJourneyDetails from '../../hooks/useJourneyDetails';
 import Tabs from './tabs';
 import SearchStationInput from '../station-search';
 import SelectInput from '../select';
+import Error from '../error';
 
 function Journeys() {
   const {
@@ -20,7 +21,7 @@ function Journeys() {
     setStationId,
   } = useJourneyDetails();
   if (error) {
-    return <div>Error</div>;
+    return <Error />;
   }
   return (
     <>
