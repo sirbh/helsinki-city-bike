@@ -126,3 +126,68 @@ export const getPopularDepartureStation = (id: number) => {
 
   return departureStationWithCount.slice(0, 5);
 };
+
+export const getStationSortedByDeparture = (order:'asc'|'desc') => {
+  const journeysCopy = [...journeys];
+  if(order==='asc'){
+     journeysCopy.sort((a,b)=>{
+      return a.departure_station_name.localeCompare(b.departure_station_name,'en');
+     }); 
+     return journeysCopy;
+  }
+  else {
+    journeysCopy.sort((a,b)=>{
+      return -a.departure_station_name.localeCompare(b.departure_station_name,'en');
+  }); 
+  return journeysCopy;
+  }
+};
+
+export const getStationSortedByReturn = (order:'asc'|'desc') => {
+  const journeysCopy = [...journeys];
+  if(order==='asc'){
+     journeysCopy.sort((a,b)=>{
+      return a.return_station_name.localeCompare(b.return_station_name,'en');
+     }); 
+     return journeysCopy;
+  }
+  else {
+    journeysCopy.sort((a,b)=>{
+      return -a.return_station_name.localeCompare(b.return_station_name,'en');
+  }); 
+  return journeysCopy;
+  }
+};
+
+
+export const getStationSortedByDistance = (order:'asc'|'desc') => {
+  const journeysCopy = [...journeys];
+  if(order==='asc'){
+     journeysCopy.sort((a,b)=>{
+         return a.covered_distance-b.covered_distance;
+     }); 
+     return journeysCopy;
+  }
+  else {
+    journeysCopy.sort((a,b)=>{
+     return b.covered_distance-a.covered_distance;
+  }); 
+  return journeysCopy;
+  }
+};
+
+export const getStationSortedByDuration = (order:'asc'|'desc') => {
+  const journeysCopy = [...journeys];
+  if(order==='asc'){
+     journeysCopy.sort((a,b)=>{
+         return a.duration-b.duration;
+     }); 
+     return journeysCopy;
+  }
+  else {
+    journeysCopy.sort((a,b)=>{
+     return b.duration-a.duration;
+  }); 
+  return journeysCopy;
+  }
+};
