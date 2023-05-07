@@ -21,8 +21,7 @@ function SelectInput({
         Journey Type
       </InputLabel>
       <Select
-        labelId="demo-simple-select-autowidth-label"
-        id="demo-simple-select-autowidth"
+        id="journey-type"
         value={selectedJourneyType}
         onChange={(e) => {
           handleChange(e.target.value);
