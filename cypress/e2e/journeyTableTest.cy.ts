@@ -7,7 +7,7 @@ import {
 
 describe("journey table test", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000");
+    cy.visit("");
   });
   it("should have correct header", () => {
     cy.get("table thead tr th:nth-child(1)").should(
@@ -190,44 +190,47 @@ describe("journey table test", () => {
       });
   });
 
-  it("should show the content according to the value in the search input",()=>{
-    cy.get('input').first().type('aa');
+  it("should show the content according to the value in the search input", () => {
+    cy.get("input").first().type("aa");
     cy.wait(500);
-    cy.get('[class^=MuiAutocomplete-popper]').contains('Aalto University (M), Korkeakoulua').click();
-    cy.get('[id=journey-type]').first().click();
-    cy.get('ul li:nth-child(1)').contains('Departure').click();
+    cy.get("[class^=MuiAutocomplete-popper]")
+      .contains("Aalto University (M), Korkeakoulua")
+      .click();
+    cy.get("[id=journey-type]").first().click();
+    cy.get("ul li:nth-child(1)").contains("Departure").click();
     cy.get("table tbody tr td")
-    .then(($el) => {
-      return Cypress._.map($el, "innerText");
-    })
-    .then((cellDataArray) => {
-      const departureStations = cellDataArray.filter((_d, i) => i % 4 === 0);
-      departureStations.forEach(station=>expect(station).equal('Aalto-yliopisto (M), Korkeakouluaukio'));
-    });
+      .then(($el) => {
+        return Cypress._.map($el, "innerText");
+      })
+      .then((cellDataArray) => {
+        const departureStations = cellDataArray.filter((_d, i) => i % 4 === 0);
+        departureStations.forEach((station) =>
+          expect(station).equal("Aalto-yliopisto (M), Korkeakouluaukio")
+        );
+      });
 
-
-    cy.get('input').first().type('ba');
+    cy.get("input").first().type("ba");
     cy.wait(500);
-    cy.get('[class^=MuiAutocomplete-popper]').contains('Baana').click();
-    cy.get('[id=journey-type]').first().click();
-    cy.get('ul li:nth-child(2)').contains('Return').click();
+    cy.get("[class^=MuiAutocomplete-popper]").contains("Baana").click();
+    cy.get("[id=journey-type]").first().click();
+    cy.get("ul li:nth-child(2)").contains("Return").click();
     cy.get("table tbody tr td")
-    .then(($el) => {
-      return Cypress._.map($el, "innerText");
-    })
-    .then((cellDataArray) => {
-      const departureStations = cellDataArray.filter((_d, i) => i % 4 === 1);
-      departureStations.forEach(station=>expect(station).equal('Baana'));
-    });
+      .then(($el) => {
+        return Cypress._.map($el, "innerText");
+      })
+      .then((cellDataArray) => {
+        const departureStations = cellDataArray.filter((_d, i) => i % 4 === 1);
+        departureStations.forEach((station) => expect(station).equal("Baana"));
+      });
   });
 
-  it("should be able to change the page when clicked on the arrows",()=>{
-       cy.get('[class^=MuiTablePagination]').contains('1–10 of 19');
-       cy.get('[data-testid=KeyboardArrowRightIcon]').click();
-       cy.wait(500);
-       cy.get('[class^=MuiTablePagination]').contains('11–19 of 19');
-       cy.get('[data-testid=KeyboardArrowLeftIcon]').click();
-       cy.wait(500);
-       cy.get('[class^=MuiTablePagination]').contains('1–10 of 19');
+  it("should be able to change the page when clicked on the arrows", () => {
+    cy.get("[class^=MuiTablePagination]").contains("1–10 of 19");
+    cy.get("[data-testid=KeyboardArrowRightIcon]").click();
+    cy.wait(500);
+    cy.get("[class^=MuiTablePagination]").contains("11–19 of 19");
+    cy.get("[data-testid=KeyboardArrowLeftIcon]").click();
+    cy.wait(500);
+    cy.get("[class^=MuiTablePagination]").contains("1–10 of 19");
   });
 });

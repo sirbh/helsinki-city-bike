@@ -1,6 +1,6 @@
 describe("stations table tests", () => {
   beforeEach(() => {
-    cy.visit("http://localhost:3000");
+    cy.visit("");
     cy.contains("stations", { matchCase: false }).click();
   });
   it("should contain correct headers", () => {
