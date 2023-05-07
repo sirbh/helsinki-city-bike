@@ -1,21 +1,23 @@
 services:
-  # backend:
-  #   image: backend-dev
-  #   build:
-  #     context: .
-  #     dockerfile: dev.Dockerfile
-  #   container_name: backend-dev
-  #   volumes:
-  #     - type: bind
-  #       source: .
-  #       target: /usr/src/app
+  backend:
+    image: backend-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    container_name: backend-dev
+    ports:
+      - 3000:3000
+    volumes:
+      - type: bind
+        source: .
+        target: /usr/src/app
  
   db:
     image: postgres:14
     container_name: postgres
     hostname: postgres
     ports:
-      - 5432:5432
+      - 3002:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
