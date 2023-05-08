@@ -12,3 +12,30 @@ License and Other helpful info:
 
 - Dataset: https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv
 - License and information: https://www.avoindata.fi/data/en/dataset/hsl-n-kaupunkipyoraasemat/resource/a23eef3a-cc40-4608-8aa2-c730d17e8902
+
+## Tech used
+
+### Backend
+* [Node.js](https://nodejs.org/)
+* [Express](https://expressjs.com/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Docker](https://www.docker.com/)
+* [Morgan](https://expressjs.com/en/resources/middleware/morgan.html)
+* [Git](https://git-scm.com/)
+
+### Frontend
+* [ReactJs](https://react.dev/)
+* [MaterialUI](https://mui.com/)
+* [Axios](https://axios-http.com/docs/intro)
+* [Tanstack query](https://tanstack.com/query/v3/)
+
+### Storage
+* [PostgreSQL](https://www.postgresql.org/)
+* [Prisma ORM](https://www.prisma.io/)
+
+### Testing
+* [Jest](https://www.chaijs.com/)
+* [Supertest](https://www.npmjs.com/package/supertest)
+* [Cypress](https://www.cypress.io/)
+
+
