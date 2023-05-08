@@ -167,7 +167,7 @@ After running above command you can access the terminal to the backend server an
 Example response:
     </br>
     </br>
-    ```json
+```
  {
     "details": {
         "id": 12,
@@ -259,7 +259,7 @@ Example response:
     ]
 }
 
- ```
+```
 
 
 ## Further scope of improvements
