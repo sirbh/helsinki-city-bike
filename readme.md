@@ -38,4 +38,27 @@ License and Other helpful info:
 * [Supertest](https://www.npmjs.com/package/supertest)
 * [Cypress](https://www.cypress.io/)
 
+## Running the app
+
+Docker can be use to setup the dev env. Make sure you have docker installed and running.
+To start dev server simply run the following command in terminal:
+
+```
+docker compose -f docker-compose.dev.yml up
+```
+after running the above command the app will be live on `http://localhost:3000/`
+
+## Running the tests
+
+Again for testing separate docker file has been created. To run the test simply run the following command.
+
+```
+docker compose -f docker-compose.test.yml up
+```
+The above command will run the e2e test automaticaly but to run unit test you need to open the bash for the container `backend-tes` with the following command:
+
+```
+docker exec -it backend-test bash
+```
+
 
