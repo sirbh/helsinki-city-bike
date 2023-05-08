@@ -40,8 +40,8 @@ License and Other helpful info:
 
 ## Running the app
 
-Docker can be use to setup the dev env. Make sure you have docker installed and running.
-To start dev server simply run the following command in terminal:
+Docker can be used to setup the dev environment. Make sure you have docker installed and running.
+To start dev server simply run the following command in terminal opened in root of project directory:
 
 ```
 docker compose -f docker-compose.dev.yml up
@@ -75,17 +75,169 @@ After running above command you can access the terminal to the backend server an
 
 ### Stations API
 
-1. `/api/stations/`
+1. `/api/stations/`  return stations details and total count of records.
 
  - `?take=10&?page=2`
+    </br>
+    Both `take` and `page` are required field and can be of type `integer`.
+    Example request `/api/stations/?take=10&?page=2`
+    ```
+    {
+    "count": 457,   // total number of records
+    "details": [
+        {
+            "id": 4,
+            "name": "Viiskulma",
+            "address": "Fredriksgatan  19",
+            "city": "Espoo",
+            "operator": "CityBike Finland",
+            "capacity": 14,
+            "x": "24.9417758006418",
+            "y": "60.1609858921764"
+        },
+        {
+            "id": 5,
+            "name": "Sepänkatu",
+            "address": "Fabriksgatan 25",
+            "city": "Espoo",
+            "operator": "CityBike Finland",
+            "capacity": 32,
+            "x": "24.9362853002102",
+            "y": "60.157948291819"
+        },
+        {
+            "id": 6,
+            "name": "Hietalahdentori",
+            "address": "Sandviksgatan 2",
+            "city": "Espoo",
+            "operator": "CityBike Finland",
+            "capacity": 24,
+            "x": "24.9296476311878",
+            "y": "60.1622283898112"
+        }
+    ]
+}
+    ```
 
-2. `/api/stations/search`
+2. `/api/stations/search`  return station list corresponding to `query` param
 
  - `?query=aa`
+   </br>
+   `query` is required field and can be of type `string`
+    Example request `/api/stations/search?query=aa`
+    ```
+    [
+    {
+        "id": 539,
+        "name": "Aalto University (M), Tietotie"
+    },
+    {
+        "id": 541,
+        "name": "Aalto University (M), Korkeakoulua"
+    }
+]
+    ```
 
-3. `/api/stations/${id}`
+   
 
- - `12`
+3. `/api/stations/${id}` return details of station whose id is provided
+
+ - `id` is of type integer.
+ Example request `/api/stations/12`
+
+ ```
+ {
+    "details": {
+        "id": 12,
+        "name": "Kanavaranta",
+        "address": "Kanalkajen 1",
+        "city": "Espoo",
+        "operator": "CityBike Finland",
+        "capacity": 34,
+        "x": "24.9584922784237",
+        "y": "60.1684959040351"
+    },
+    "total_departures": 15310,   // total journeys started from station
+    "total_return": 15724,       // total journeys ended at station
+    "avg_departure_distance": "2569.2210333115610712",  // average distance in meters
+    "avg_return_distance": "2531.6398499109641313",     // average return distance in meters
+    "popular_departure_stations": [
+        {
+            "_count": {
+                "return_station_id": 612
+            },
+            "departure_station_id": 123,
+            "departure_station_name": "Näkinsilta"
+        },
+        {
+            "_count": {
+                "return_station_id": 610
+            },
+            "departure_station_id": 1,
+            "departure_station_name": "Kaivopuisto"
+        },
+        {
+            "_count": {
+                "return_station_id": 604
+            },
+            "departure_station_id": 16,
+            "departure_station_name": "Liisanpuistikko"
+        },
+        {
+            "_count": {
+                "return_station_id": 490
+            },
+            "departure_station_id": 40,
+            "departure_station_name": "Hakaniemi (M)"
+        },
+        {
+            "_count": {
+                "return_station_id": 472
+            },
+            "departure_station_id": 122,
+            "departure_station_name": "Lintulahdenkatu"
+        }
+    ],
+    "popular_return_station": [
+        {
+            "_count": {
+                "departure_station_id": 633
+            },
+            "return_station_id": 16,
+            "return_station_name": "Liisanpuistikko"
+        },
+        {
+            "_count": {
+                "departure_station_id": 584
+            },
+            "return_station_id": 123,
+            "return_station_name": "Näkinsilta"
+        },
+        {
+            "_count": {
+                "departure_station_id": 583
+            },
+            "return_station_id": 40,
+            "return_station_name": "Hakaniemi (M)"
+        },
+        {
+            "_count": {
+                "departure_station_id": 528
+            },
+            "return_station_id": 41,
+            "return_station_name": "Ympyrätalo"
+        },
+        {
+            "_count": {
+                "departure_station_id": 504
+            },
+            "return_station_id": 121,
+            "return_station_name": "Vilhonvuorenkatu"
+        }
+    ]
+}
+ ```
+
 
 ## Further scope of improvements
 
@@ -93,9 +245,10 @@ After running above command you can access the terminal to the backend server an
  - Functionality to add journeys.
  - Cypress test can be moved into its own folder.
  - Performance can be improved using hooks like `useMemo` and `useCallback`. 
- - Adding authentication so that only some privileged use can add stations and journeys.
+ - Adding authentication so that only some privileged user can add stations and journeys.
  - More validations can be added to database.
  - Relations can be added to database. 
+ - Swagger can be added for  API management.
 
 
 
