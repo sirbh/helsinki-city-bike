@@ -92,7 +92,7 @@ After running above command you can access the terminal to the backend server an
     ```json
     {
     "count": 457,   // total number of records
-    "details": [
+    "details": [    // stations details as array
         {
             "id": 4,
             "name": "Viiskulma",
@@ -123,8 +123,8 @@ After running above command you can access the terminal to the backend server an
             "x": "24.9296476311878",
             "y": "60.1622283898112"
         }
-    ]
-}
+      ]
+    }
     ```
 
 2. `/api/stations/search`  return station list corresponding to `query` param
@@ -151,7 +151,7 @@ After running above command you can access the terminal to the backend server an
         "id": 541,
         "name": "Aalto University (M), Korkeakoulua"
     }
-]
+    ]
     ```
 
    
@@ -167,8 +167,9 @@ After running above command you can access the terminal to the backend server an
 Example response:
     </br>
     </br>
+
 ```
- {
+{
     "details": {
         "id": 12,
         "name": "Kanavaranta",
@@ -179,11 +180,11 @@ Example response:
         "x": "24.9584922784237",
         "y": "60.1684959040351"
     },
-    "total_departures": 15310,   // total journeys started from station
-    "total_return": 15724,       // total journeys ended at station
-    "avg_departure_distance": "2569.2210333115610712",  // average distance in meters
-    "avg_return_distance": "2531.6398499109641313",     // average return distance in meters
-    "popular_departure_stations": [
+    "total_departures": 15310,                            // total journeys started from station
+    "total_return": 15724,                                // total jourenys ended at station
+    "avg_departure_distance": "2569.2210333115610712", 
+    "avg_return_distance": "2531.6398499109641313",
+    "popular_departure_stations": [                       
         {
             "_count": {
                 "return_station_id": 612
@@ -258,7 +259,6 @@ Example response:
         }
     ]
 }
-
 ```
 
 
