@@ -55,10 +55,48 @@ Again for testing separate docker file has been created. To run the test simply 
 ```
 docker compose -f docker-compose.test.yml up
 ```
-The above command will run the e2e test automaticaly but to run unit test you need to open the bash for the container `backend-tes` with the following command:
+The above command will run the e2e test automaticaly but to run unit test you need to open the bash for the container `backend-test` with the following command:
 
 ```
 docker exec -it backend-test bash
 ```
+
+After running above command you can access the terminal to the backend server and unit test can be run by `npm run test`
+
+## API Documentation
+
+### Journeys API
+
+1. `/api/journeys`  return journey details and total journeys records.
+ 
+ - `?take=10&?page=2` both "take"(number of records) and "page"(page number) are required.
+ - `?sort_prop=duration&order=asc` 
+ - `?filter_prop=departure_station_id&id=512`
+
+### Stations API
+
+1. `/api/stations/`
+
+ - `?take=10&?page=2`
+
+2. `/api/stations/search`
+
+ - `?query=aa`
+
+3. `/api/stations/${id}`
+
+ - `12`
+
+## Further scope of improvements
+
+ - Functionality to add stations with help of GooglePlaces API.
+ - Functionality to add journeys.
+ - Cypress test can be moved into its own folder.
+ - Performance can be improved using hooks like `useMemo` and `useCallback`. 
+ - Adding authentication so that only some privileged use can add stations and journeys.
+ - More validations can be added to database.
+ - Relations can be added to database. 
+
+
 
 
