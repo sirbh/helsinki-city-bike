@@ -68,15 +68,19 @@ after running the above command the app will be live on `http://localhost:3000/`
 Again for testing separate docker file has been created. To run the test simply run the following command.
 
 ```
-docker compose -f docker-compose.test.yml up
+docker compose -f docker-compose.test.yml up -d
 ```
-The above command will run the e2e test automaticaly but to run unit test you need to open the bash for the container `backend-test` with the following command:
+The above command will setup the test environment in docker
+To run test start container `backend-test` in interactive mode using following command
 
 ```
 docker exec -it backend-test bash
 ```
 
-After running above command you can access the terminal to the backend server and unit test can be run by `npm run test`
+After running above command you can access the terminal to the already running backend server 
+
+Unit test can be run by `npm run test` 
+End-to-end test can be run by `npm run test:e2e`
 
 ## API Documentation
 
@@ -254,13 +258,13 @@ After running above command you can access the terminal to the backend server an
 
 1. `/api/stations/`  return stations details and total count of records.
 
- - `?take=10&?page=2`
+ - `?take=10&page=2`
     </br>
     </br>
     Both `take` and `page` are required field and can be of type `integer`.
     </br>
     </br>
-    Example request `/api/stations/?take=3&?page=2`
+    Example request `/api/stations/?take=3&page=2`
     </br>
     </br>
     Example response:
@@ -451,6 +455,7 @@ Example response:
  - More validations can be added to database.
  - Relations can be added to database. 
  - Swagger can be added for  API management.
+ - API security can be added as at the moment anyone can access the API.
 
 
 
