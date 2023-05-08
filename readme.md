@@ -86,7 +86,10 @@ After running above command you can access the terminal to the backend server an
     Example request `/api/stations/?take=10&?page=2`
     </br>
     </br>
-    ```
+    Example response:
+    </br>
+    </br>
+    ```json
     {
     "count": 457,   // total number of records
     "details": [
@@ -133,7 +136,12 @@ After running above command you can access the terminal to the backend server an
     </br>
     </br>
     Example request `/api/stations/search?query=aa`
-    ```
+    </br>
+    </br>
+    Example response:
+    </br>
+    </br>
+    ```json
     [
     {
         "id": 539,
@@ -156,8 +164,10 @@ After running above command you can access the terminal to the backend server an
  Example request `/api/stations/12`
   </br>
   </br>
-
- ```
+Example response:
+    </br>
+    </br>
+    ```json
  {
     "details": {
         "id": 12,
@@ -248,6 +258,7 @@ After running above command you can access the terminal to the backend server an
         }
     ]
 }
+
  ```
 
 
