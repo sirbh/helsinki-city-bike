@@ -69,9 +69,171 @@ After running above command you can access the terminal to the backend server an
 
 1. `/api/journeys`  return journey details and total journeys records.
  
- - `?take=10&?page=2` both "take"(number of records) and "page"(page number) are required.
+ - `?take=10&page=2`
+    </br>
+    </br>
+    Both `take` and `page` are required field and can be of type `integer`.
+    </br>
+    </br>
+     Example request `/api/journeys?take=3&page=2`
+    </br>
+    </br>
+    Example response:
+    </br>
+    </br>
+    ```json
+    {
+    "count": 1564379,
+    "details": [
+        {
+            "id": 606,
+            "departure_time": "2021-05-31T21:16:53.000Z",
+            "return_time": "2021-05-31T21:20:09.000Z",
+            "departure_station_id": 541,
+            "departure_station_name": "Aalto-yliopisto (M), Korkeakouluaukio",
+            "return_station_id": 547,
+            "return_station_name": "Jämeräntaival",
+            "covered_distance": "699",
+            "duration": 196
+        },
+        {
+            "id": 883,
+            "departure_time": "2021-05-31T20:41:56.000Z",
+            "return_time": "2021-05-31T21:08:56.000Z",
+            "departure_station_id": 541,
+            "departure_station_name": "Aalto-yliopisto (M), Korkeakouluaukio",
+            "return_station_id": 517,
+            "return_station_name": "Länsituuli",
+            "covered_distance": "2360",
+            "duration": 1614
+        },
+        {
+            "id": 904,
+            "departure_time": "2021-05-31T20:40:08.000Z",
+            "return_time": "2021-05-31T20:41:38.000Z",
+            "departure_station_id": 541,
+            "departure_station_name": "Aalto-yliopisto (M), Korkeakouluaukio",
+            "return_station_id": 541,
+            "return_station_name": "Aalto-yliopisto (M), Korkeakouluaukio",
+            "covered_distance": "51",
+            "duration": 86
+        }
+      ]
+    }
+    ```
  - `?sort_prop=duration&order=asc` 
+    </br>
+    </br>
+    `sort_prop` is property by which we want to want to sort the journey details.</br>
+    possible options are: `duration`,`covered_distance`,`departure_station_name` or `return_station_name`</br>
+    default value:`departure_station_name`.
+    </br>
+    </br>
+    `order` defines the order of sorting.
+    possible options are: `asc` or `desc`
+    default value:`asc`.
+    </br>
+    </br>
+    Example request `/api/journeys?take=3&page=2&sort_prop=duration&order=asc`
+    </br>
+    </br>
+    Example response:
+    </br>
+    </br>
+    ```json
+      {
+    "count": 1564379,
+    "details": [
+        {
+            "id": 1281569,
+            "departure_time": "2021-07-14T17:11:54.000Z",
+            "return_time": "2021-07-14T17:12:13.000Z",
+            "departure_station_id": 208,
+            "departure_station_name": "Valimotie",
+            "return_station_id": 208,
+            "return_station_name": "Valimotie",
+            "covered_distance": "53",
+            "duration": 14
+        },
+        {
+            "id": 314285,
+            "departure_time": "2021-05-09T12:31:40.000Z",
+            "return_time": "2021-05-09T12:31:59.000Z",
+            "departure_station_id": 43,
+            "departure_station_name": "Karhupuisto",
+            "return_station_id": 43,
+            "return_station_name": "Karhupuisto",
+            "covered_distance": "10",
+            "duration": 15
+        },
+        {
+            "id": 1251924,
+            "departure_time": "2021-07-15T22:50:45.000Z",
+            "return_time": "2021-07-15T22:51:04.000Z",
+            "departure_station_id": 111,
+            "departure_station_name": "Esterinportti",
+            "return_station_id": 111,
+            "return_station_name": "Esterinportti",
+            "covered_distance": "125",
+            "duration": 15
+        }
+      ]
+    }
+    ```
  - `?filter_prop=departure_station_id&id=512`
+    </br>
+    </br>
+    `filter_prop` is property by which we want to want to filter the journey details.</br>
+    possible options are: `departure_station_id` or `return_station_id`.</br>
+    `id` is the `integer` station id of the station by which we want to filter.
+    </br>
+    </br>
+    Example request `/api/journeys?take=3&page=2&sort_prop=duration&order=asc&filter_props=return_station_id&id=12`
+    </br>
+    </br>
+    Example response:
+    </br>
+    </br>
+    ```json
+    {
+    "count": 15310,
+    "details": [
+        {
+            "id": 880573,
+            "departure_time": "2021-06-06T00:34:59.000Z",
+            "return_time": "2021-06-06T00:35:31.000Z",
+            "departure_station_id": 12,
+            "departure_station_name": "Kanavaranta",
+            "return_station_id": 12,
+            "return_station_name": "Kanavaranta",
+            "covered_distance": "18",
+            "duration": 28
+        },
+        {
+            "id": 389854,
+            "departure_time": "2021-05-01T11:04:04.000Z",
+            "return_time": "2021-05-01T11:04:38.000Z",
+            "departure_station_id": 12,
+            "departure_station_name": "Kanavaranta",
+            "return_station_id": 12,
+            "return_station_name": "Kanavaranta",
+            "covered_distance": "241.67",
+            "duration": 29
+        },
+        {
+            "id": 1213377,
+            "departure_time": "2021-07-17T22:29:23.000Z",
+            "return_time": "2021-07-17T22:29:56.000Z",
+            "departure_station_id": 12,
+            "departure_station_name": "Kanavaranta",
+            "return_station_id": 12,
+            "return_station_name": "Kanavaranta",
+            "covered_distance": "24",
+            "duration": 29
+        }
+      ]
+    }
+    ```
 
 ### Stations API
 
@@ -83,7 +245,7 @@ After running above command you can access the terminal to the backend server an
     Both `take` and `page` are required field and can be of type `integer`.
     </br>
     </br>
-    Example request `/api/stations/?take=10&?page=2`
+    Example request `/api/stations/?take=3&?page=2`
     </br>
     </br>
     Example response:
