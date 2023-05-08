@@ -13,6 +13,14 @@ License and Other helpful info:
 - Dataset: https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv
 - License and information: https://www.avoindata.fi/data/en/dataset/hsl-n-kaupunkipyoraasemat/resource/a23eef3a-cc40-4608-8aa2-c730d17e8902
 
+## Deployment 
+
+Project has been deployed using fly.io
+Live URL: https://helsinki-city-bike.fly.dev/
+
+CI pipeline has been setup using github actions: https://github.com/sirbh/helsinki-city-bike/actions
+
+
 ## Tech used
 
 ### Backend
