@@ -11,17 +11,6 @@ services:
       - db
     command: npm run dev
 
-  test:
-    image: test-runner
-    build:
-      context: .
-      dockerfile: test.Dockerfile
-    container_name: test-runner
-    depends_on:
-      - backend
-    command: npm run test:e2e && npm run test
-
-  
  
   db:
     image: postgres:14
