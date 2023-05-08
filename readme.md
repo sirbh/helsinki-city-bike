@@ -79,8 +79,13 @@ After running above command you can access the terminal to the backend server an
 
  - `?take=10&?page=2`
     </br>
+    </br>
     Both `take` and `page` are required field and can be of type `integer`.
+    </br>
+    </br>
     Example request `/api/stations/?take=10&?page=2`
+    </br>
+    </br>
     ```
     {
     "count": 457,   // total number of records
@@ -122,8 +127,11 @@ After running above command you can access the terminal to the backend server an
 2. `/api/stations/search`  return station list corresponding to `query` param
 
  - `?query=aa`
-   </br>
-   `query` is required field and can be of type `string`
+    </br>
+    </br>
+   `query` is required field and can be of type `string`.
+    </br>
+    </br>
     Example request `/api/stations/search?query=aa`
     ```
     [
@@ -143,7 +151,11 @@ After running above command you can access the terminal to the backend server an
 3. `/api/stations/${id}` return details of station whose id is provided
 
  - `id` is of type integer.
+  </br>
+  </br>
  Example request `/api/stations/12`
+  </br>
+  </br>
 
  ```
  {
@@ -240,6 +252,8 @@ After running above command you can access the terminal to the backend server an
 
 
 ## Further scope of improvements
+
+
 
  - Functionality to add stations with help of GooglePlaces API.
  - Functionality to add journeys.
