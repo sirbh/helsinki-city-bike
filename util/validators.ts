@@ -76,3 +76,8 @@ export const userValidator = object({
       "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     ),
 });
+
+export const loginDetailsValidators = object({
+  username: string().required('username is required'),
+  password:string().required('password is required')
+});
