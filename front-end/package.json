@@ -17,12 +17,14 @@
     "@mui/material": "^5.12.2",
     "@tanstack/react-query": "^4.29.5",
     "axios": "^1.3.6",
+    "formik": "^2.2.9",
     "helsinki-city-bike": "file:..",
     "leaflet": "^1.9.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.1",
-    "react-router-dom": "^6.11.0"
+    "react-router-dom": "^6.11.0",
+    "yup": "^1.1.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
