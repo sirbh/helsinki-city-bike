@@ -68,3 +68,14 @@ export interface ISingleStationAPIResponse {
     return_station_name: string;
   }[];
 }
+
+export interface User {
+  name: string;
+  username: string;
+  password: string;
+}
+
+export interface Message {
+  type: 'error' | 'success' | 'info';
+  message: string;
+}
