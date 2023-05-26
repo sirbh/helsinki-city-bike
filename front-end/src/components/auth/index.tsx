@@ -108,24 +108,16 @@ function Auth({ open, onClose }: AuthProps) {
                 position: 'absolute',
                 bottom: 20,
                 left: 0,
+                color: (theme) => theme.palette.primary.main,
+                textDecorationLine: 'underline',
+                cursor: 'pointer',
               }}
               width="100%"
+              onClick={() => {
+                setFormType('register');
+              }}
             >
-              No Account? Kindly{' '}
-              <Typography
-                variant="body1"
-                sx={{
-                  color: (theme) => theme.palette.primary.main,
-                  textDecorationLine: 'underline',
-                  cursor: 'pointer',
-                }}
-                display="inline"
-                onClick={() => {
-                  setFormType('register');
-                }}
-              >
-                Register
-              </Typography>{' '}
+              No Account? Kindly Register
             </Typography>
           ) : (
             <Typography
@@ -136,25 +128,16 @@ function Auth({ open, onClose }: AuthProps) {
                 position: 'absolute',
                 bottom: 20,
                 left: 0,
+                color: (theme) => theme.palette.primary.main,
+                textDecorationLine: 'underline',
+                cursor: 'pointer',
               }}
               width="100%"
+              onClick={() => {
+                setFormType('login');
+              }}
             >
-              Already Registred?{' '}
-              <Typography
-                variant="body1"
-                sx={{
-                  color: (theme) => theme.palette.primary.main,
-                  textDecorationLine: 'underline',
-                  cursor: 'pointer',
-                }}
-                display="inline"
-                onClick={() => {
-                  setFormType('login');
-                }}
-              >
-                Login
-              </Typography>{' '}
-              Here
+              Already Registred? Login Here
             </Typography>
           )}
         </CardContent>
