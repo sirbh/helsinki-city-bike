@@ -4,6 +4,7 @@ import {
   ISearchStation,
   ISingleStationAPIResponse,
   IStationAPIResponse,
+  User,
 } from '../types';
 
 export const getJourneyDetails = async (
@@ -38,6 +39,20 @@ export const getStations = async (page: number, take: number) => {
 export const getSingleStation = async (id: string) => {
   const { data } = await axios.get<ISingleStationAPIResponse>(
     `/api/stations/${id}`
+  );
+  return data;
+};
+
+export interface NewUserResponse {
+  id: number;
+  name: string;
+  username: string;
+}
+
+export const createUser = async (newUser: User) => {
+  const { data } = await axios.post<NewUserResponse>(
+    '/api/auth/register',
+    newUser
   );
   return data;
 };
