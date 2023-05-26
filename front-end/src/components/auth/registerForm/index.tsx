@@ -1,10 +1,24 @@
-import { TextField, Box, Button } from '@mui/material';
+import {
+  TextField,
+  Box,
+  Button,
+  CircularProgress,
+  Typography,
+} from '@mui/material';
 import { Formik } from 'formik';
-import { object, string } from 'yup';
+import { object, string, ref } from 'yup';
+import { useState } from 'react';
+import { AxiosError } from 'axios';
+import useCreateUserMutation from '../../../hooks/useCreateUserMutation';
+import { Message } from '../../../types';
 
 function RegisterForm() {
+  const { mutate, isLoading } = useCreateUserMutation();
+  const [formMessage, setFormMessage] = useState<Message | undefined>();
   return (
     <Formik
+      validateOnChange={false}
+      validateOnBlur={false}
       initialValues={{
         name: '',
         username: '',
@@ -12,13 +26,60 @@ function RegisterForm() {
         confirmPass: '',
       }}
       onSubmit={(values) => {
-        console.log(values);
+        mutate(
+          {
+            name: values.name,
+            password: values.password,
+            username: values.username,
+          },
+          {
+            onError: (error) => {
+              const { response } = error as AxiosError;
+              setFormMessage({
+                type: 'error',
+                message: response?.data as string,
+              });
+              setTimeout(() => {
+                setFormMessage(undefined);
+              }, 10000);
+            },
+            onSuccess: (data) => {
+              setFormMessage({
+                type: 'info',
+                message: 'user created successfully',
+              });
+              setTimeout(() => {
+                setFormMessage(undefined);
+              }, 10000);
+            },
+          }
+        );
       }}
       validationSchema={object({
-        username: string().required('username is required'),
-        name: string().required('name is required'),
-        password: string().required('password is required'),
-        confirmPass: string().required('confirm password is required'),
+        username: string()
+          .required('username is required')
+          .test(
+            'len',
+            'username must be more than 2 chars',
+            (val) => val.length >= 3
+          ),
+        name: string()
+          .required('name is required')
+          .test(
+            'len',
+            'name must be more than 2 chars',
+            (val) => val.length >= 3
+          ),
+        password: string()
+          .required('password is required')
+          .test(
+            'len',
+            'password must be more than 7 chars',
+            (val) => val.length >= 8
+          ),
+        confirmPass: string()
+          .required('confirm password is required')
+          .oneOf([ref('password')], 'Passwords must match'),
       })}
     >
       {({ getFieldProps, handleSubmit, errors }) => (
@@ -54,13 +115,19 @@ function RegisterForm() {
           <TextField
             {...getFieldProps('confirmPass')}
             label="confirm password"
-            type="confirm password"
+            type="password"
             fullWidth
-            error={!!errors.name}
-            helperText={errors.name}
+            error={!!errors.confirmPass}
+            helperText={errors.confirmPass}
           />
           <Button
             variant="contained"
+            disabled={isLoading}
+            endIcon={
+              isLoading ? (
+                <CircularProgress size="20px" color="inherit" />
+              ) : undefined
+            }
             fullWidth
             onClick={() => {
               handleSubmit();
@@ -68,6 +135,14 @@ function RegisterForm() {
           >
             submit
           </Button>
+          <Typography
+            variant="body2"
+            marginTop="10px"
+            color={formMessage?.type}
+            textAlign="center"
+          >
+            {formMessage ? `*${formMessage.message}` : ''}
+          </Typography>
         </Box>
       )}
     </Formik>
