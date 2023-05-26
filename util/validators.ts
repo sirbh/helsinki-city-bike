@@ -73,7 +73,7 @@ export const userValidator = object({
     .required("Please Enter your password")
     .matches(
       /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      "Password Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     ),
 });
 
