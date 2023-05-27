@@ -14,7 +14,12 @@ import { deepPurple } from '@mui/material/colors';
 import { useContext } from 'react';
 import AuthContext from '../../contexts/AuthContext';
 
-export default function AccountMenu() {
+interface AccountMenuProps {
+  name: string;
+  username: string;
+}
+
+export default function AccountMenu({ name, username }: AccountMenuProps) {
   const { setUserDetails } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -37,7 +42,7 @@ export default function AccountMenu() {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar sx={{ width: 32, height: 32, bgcolor: deepPurple[500] }}>
-              M
+              {name.split('')[0]}
             </Avatar>
           </IconButton>
         </Tooltip>
@@ -81,13 +86,13 @@ export default function AccountMenu() {
           }}
         >
           <Avatar sx={{ width: 42, height: 42, bgcolor: deepPurple[500] }}>
-            M
+            {name.split('')[0]}
           </Avatar>
           <Typography variant="body1" textAlign="center">
-            saurabh chauhan
+            {name}
           </Typography>
           <Typography variant="body2" color="grey">
-            sirbh
+            {username}
           </Typography>
         </Box>
         <Divider />

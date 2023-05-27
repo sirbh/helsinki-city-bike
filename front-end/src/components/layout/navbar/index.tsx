@@ -66,7 +66,7 @@ function Navbar() {
                 </Link>
               ))}
               {userDetails ? (
-                <AccountMenu />
+                <AccountMenu name={userDetails.name} username={userDetails.username}/>
               ) : (
                 <Button
                   onClick={() => {
