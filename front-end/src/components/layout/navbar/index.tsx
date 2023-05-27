@@ -3,8 +3,10 @@ import Box from '@mui/material/Box';
 import { AppBar, Container, Toolbar, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useContext } from 'react';
 import Auth from '../../auth';
+import AccountMenu from '../../menu';
+import AuthContext from '../../../contexts/AuthContext';
 
 function Navbar() {
   const pages = [
@@ -12,7 +14,9 @@ function Navbar() {
     { name: 'Stations', route: '/stations' },
   ];
 
-  const [openLoginModal, setOpenLoginModal] = useState(false);
+  // const [openLoginModal, setOpenLoginModal] = useState(false);
+  const { userDetails, openAuthModal, setOpenAuthModal } =
+    useContext(AuthContext);
 
   return (
     <>
@@ -20,7 +24,6 @@ function Navbar() {
         <Container maxWidth="xl">
           <Toolbar disableGutters>
             <PedalBike sx={{ display: { md: 'flex' }, mr: 1 }} />
-
             <Typography
               variant="h6"
               noWrap
@@ -62,29 +65,37 @@ function Navbar() {
                   </Button>
                 </Link>
               ))}
-              <Button
-                onClick={() => {
-                  setOpenLoginModal(true);
-                }}
-                sx={{
-                  my: 2,
-                  color: 'white',
-                  display: 'block',
-                  marginLeft: '20px',
-                }}
-                variant="contained"
-                color="secondary"
-              >
-                Login
-              </Button>
+              {userDetails ? (
+                <AccountMenu />
+              ) : (
+                <Button
+                  onClick={() => {
+                    if (setOpenAuthModal) {
+                      setOpenAuthModal(true);
+                    }
+                  }}
+                  sx={{
+                    my: 2,
+                    color: 'white',
+                    display: 'block',
+                    marginLeft: '20px',
+                  }}
+                  variant="contained"
+                  color="secondary"
+                >
+                  Login
+                </Button>
+              )}
             </Box>
           </Toolbar>
         </Container>
       </AppBar>
       <Auth
-        open={openLoginModal}
+        open={openAuthModal}
         onClose={() => {
-          setOpenLoginModal(false);
+          if (setOpenAuthModal) {
+            setOpenAuthModal(false);
+          }
         }}
       />
     </>

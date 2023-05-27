@@ -7,13 +7,17 @@ import {
 } from '@mui/material';
 import { Formik } from 'formik';
 import { object, string, ref } from 'yup';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { AxiosError } from 'axios';
 import useCreateUserMutation from '../../../hooks/useCreateUserMutation';
 import { Message } from '../../../types';
+import useLoginMutation from '../../../hooks/useLoginMutation';
+import AuthContext from '../../../contexts/AuthContext';
 
 function RegisterForm() {
   const { mutate, isLoading } = useCreateUserMutation();
+  const { mutate: loginMutation, isLoading: loginLoading } = useLoginMutation();
+  const { setOpenAuthModal, setUserDetails } = useContext(AuthContext);
   const [formMessage, setFormMessage] = useState<Message | undefined>();
   return (
     <Formik
@@ -44,13 +48,29 @@ function RegisterForm() {
               }, 10000);
             },
             onSuccess: (data) => {
-              setFormMessage({
-                type: 'info',
-                message: 'user created successfully',
-              });
-              setTimeout(() => {
-                setFormMessage(undefined);
-              }, 10000);
+              loginMutation(
+                {
+                  username: data.username,
+                  password: values.password,
+                },
+                {
+                  onSuccess: (userDetails) => {
+                    if (setOpenAuthModal && setUserDetails) {
+                      setUserDetails(userDetails);
+                      setOpenAuthModal(false);
+                    }
+                  },
+                  onError: () => {
+                    setFormMessage({
+                      type: 'error',
+                      message: 'something went wrong try again later',
+                    });
+                    setTimeout(() => {
+                      setFormMessage(undefined);
+                    }, 10000);
+                  },
+                }
+              );
             },
           }
         );
@@ -122,9 +142,9 @@ function RegisterForm() {
           />
           <Button
             variant="contained"
-            disabled={isLoading}
+            disabled={isLoading || loginLoading}
             endIcon={
-              isLoading ? (
+              isLoading || loginLoading ? (
                 <CircularProgress size="20px" color="inherit" />
               ) : undefined
             }
