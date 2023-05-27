@@ -45,10 +45,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps) {
 
   useEffect(() => {
     if (userDetails) {
-      console.log('called userdetails');
       localStorage.setItem('user', JSON.stringify(userDetails));
     } else {
-      console.log('called userdetails with else');
       localStorage.removeItem('user');
     }
   }, [userDetails]);

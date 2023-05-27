@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { NewUserResponse, createUser } from '../services';
+import { createUser } from '../services';
 
 const useCreateUserMutation = () =>
   //   onError: (error: unknown) => void,

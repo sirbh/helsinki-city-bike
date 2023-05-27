@@ -20,9 +20,9 @@ function Journeys() {
     setJourneyType,
     setStationId,
   } = useJourneyDetails();
-  // if (error) {
-  //   return <Error />;
-  // }
+  if (error) {
+    return <Error />;
+  }
   return (
     <>
       <Box
