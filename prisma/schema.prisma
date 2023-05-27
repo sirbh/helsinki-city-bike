@@ -29,3 +29,10 @@ model stations {
   x        Decimal @db.Decimal
   y        Decimal @db.Decimal
 }
+
+model users {
+  id       Int    @id @default(autoincrement())
+  name     String @db.VarChar(50)
+  username String @unique(map: "username_unique") @db.VarChar(255)
+  password String @db.VarChar(255)
+}
