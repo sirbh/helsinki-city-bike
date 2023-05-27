@@ -37,7 +37,7 @@ test("if user registeration api throws validation error if password is not in co
       password: "password",
     })
     .expect(
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      "Password Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     );
 
   await api
@@ -48,7 +48,7 @@ test("if user registeration api throws validation error if password is not in co
       password: "passwordA",
     })
     .expect(
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      "Password Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     );
 
   await api
@@ -59,7 +59,7 @@ test("if user registeration api throws validation error if password is not in co
       password: "passwordA1",
     })
     .expect(
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      "Password Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     );
 
   await api
@@ -70,7 +70,7 @@ test("if user registeration api throws validation error if password is not in co
       password: "passwordA@",
     })
     .expect(
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      "Password Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     );
 });
 
@@ -104,7 +104,7 @@ describe("authentication tests that require Database", () => {
         username: "tempusername",
         password: "password!3S",
       })
-      .expect("username must be unique");
+      .expect("username already exits");
   });
 
   test("if user registeration api return registered user if correct details are given", async () => {
