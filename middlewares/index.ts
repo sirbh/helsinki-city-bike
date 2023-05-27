@@ -91,6 +91,7 @@ export const ValidateCreateUserRequest = (
   _res: Response,
   next: NextFunction
 ) => {
+  console.log(req.body);
   userValidator.validate(req.body).then((_result) => {
     next();
   }).catch(error=>{
@@ -111,7 +112,6 @@ export const ValidateLoginRequest = (
 };
 
 export const ErrorHandler: ErrorRequestHandler = (error, _req, _res, _next) => {
-  console.log(error.type);
   if (error.type === "optionality") {
     return _res.status(403).send(error.message);
   }
@@ -122,7 +122,7 @@ export const ErrorHandler: ErrorRequestHandler = (error, _req, _res, _next) => {
     return _res.status(403).send(error.message);
   }
   else if(error.code === "P2002") {
-    return _res.status(403).send("username must be unique");
+    return _res.status(403).send("username already exits");
   }
   return _res.status(400).send("server could not handle the request");
 };
