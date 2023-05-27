@@ -79,3 +79,14 @@ export interface Message {
   type: 'error' | 'success' | 'info';
   message: string;
 }
+
+export interface AuthDetails {
+  username: string;
+  password: string;
+}
+
+export interface LoginAPIResponse {
+  token: string;
+  username: string;
+  name: string;
+}

@@ -1,9 +1,11 @@
 import axios from 'axios';
 import {
+  AuthDetails,
   IJourneyAPIResponse,
   ISearchStation,
   ISingleStationAPIResponse,
   IStationAPIResponse,
+  LoginAPIResponse,
   User,
 } from '../types';
 
@@ -53,6 +55,14 @@ export const createUser = async (newUser: User) => {
   const { data } = await axios.post<NewUserResponse>(
     '/api/auth/register',
     newUser
+  );
+  return data;
+};
+
+export const login = async (authDetails: AuthDetails) => {
+  const { data } = await axios.post<LoginAPIResponse>(
+    '/api/auth/login',
+    authDetails
   );
   return data;
 };
