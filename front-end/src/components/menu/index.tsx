@@ -17,9 +17,14 @@ import AuthContext from '../../contexts/AuthContext';
 interface AccountMenuProps {
   name: string;
   username: string;
+  addStationHandler: () => void;
 }
 
-export default function AccountMenu({ name, username }: AccountMenuProps) {
+export default function AccountMenu({
+  name,
+  username,
+  addStationHandler,
+}: AccountMenuProps) {
   const { setUserDetails } = useContext(AuthContext);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -42,7 +47,7 @@ export default function AccountMenu({ name, username }: AccountMenuProps) {
             aria-expanded={open ? 'true' : undefined}
           >
             <Avatar sx={{ width: 32, height: 32, bgcolor: deepPurple[500] }}>
-              {name.split('')[0]}
+              {name.split('')[0].toUpperCase()}
             </Avatar>
           </IconButton>
         </Tooltip>
@@ -96,7 +101,12 @@ export default function AccountMenu({ name, username }: AccountMenuProps) {
           </Typography>
         </Box>
         <Divider />
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            addStationHandler();
+            setAnchorEl(null);
+          }}
+        >
           <ListItemIcon>
             <AddCircleOutlineSharp fontSize="small" />
           </ListItemIcon>

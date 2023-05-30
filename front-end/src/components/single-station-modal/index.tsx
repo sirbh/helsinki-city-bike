@@ -1,6 +1,7 @@
 import Modal from '@mui/material/Modal';
 import {
   Box,
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -17,6 +18,7 @@ interface ISingleStationModal {
   handleClose: () => void;
   stationDetails: ISingleStationAPIResponse | undefined;
   loading: boolean;
+  showDelete: boolean;
 }
 
 function SingleStationModal({
@@ -24,6 +26,7 @@ function SingleStationModal({
   handleClose,
   stationDetails,
   loading,
+  showDelete,
 }: ISingleStationModal) {
   return (
     <Modal
@@ -36,6 +39,7 @@ function SingleStationModal({
       {!loading ? (
         <Card
           sx={{
+            position: 'relative',
             minWidth: '40rem',
             ':focus': {
               outline: 'none',
@@ -131,6 +135,15 @@ function SingleStationModal({
                 );
               })}
             </Box>
+            {showDelete && (
+              <Button
+                variant="contained"
+                color="error"
+                sx={{ position: 'absolute', top: '15px', right: '15px' }}
+              >
+                Delete station
+              </Button>
+            )}
           </CardContent>
         </Card>
       ) : (

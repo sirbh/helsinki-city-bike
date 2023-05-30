@@ -1,11 +1,13 @@
 import { Box, LinearProgress } from '@mui/material';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import useStationDetails from '../../hooks/useStationDetails';
 import StationTable from './table';
 import SearchStationInput from '../station-search';
 import useSingleStationDetails from '../../hooks/useSingleStationDetails';
 import SingleStationModal from '../single-station-modal';
 import Error from '../error';
+import StationContext from '../../contexts/StationContext';
+import AuthContext from '../../contexts/AuthContext';
 
 function Stations() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
@@ -15,6 +17,7 @@ function Stations() {
     isLoading: singleStationLoading,
     setId,
   } = useSingleStationDetails();
+  const { userDetails } = useContext(AuthContext);
 
   if (isError) {
     return <Error />;
@@ -28,6 +31,7 @@ function Stations() {
         }}
         loading={singleStationLoading}
         stationDetails={singleStationDetails}
+        showDelete={!!userDetails}
       />
 
       <Box

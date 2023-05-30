@@ -2,11 +2,13 @@ import { PedalBike } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import { AppBar, Container, Toolbar, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import Auth from '../../auth';
 import AccountMenu from '../../menu';
 import AuthContext from '../../../contexts/AuthContext';
+import AddStation from '../../add-station';
+import StationContext from '../../../contexts/StationContext';
 
 function Navbar() {
   const pages = [
@@ -17,6 +19,9 @@ function Navbar() {
   // const [openLoginModal, setOpenLoginModal] = useState(false);
   const { userDetails, openAuthModal, setOpenAuthModal } =
     useContext(AuthContext);
+  const { openAddStationModal, setOpenAddStationModal } =
+    useContext(StationContext);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -69,6 +74,11 @@ function Navbar() {
                 <AccountMenu
                   name={userDetails.name}
                   username={userDetails.username}
+                  addStationHandler={() => {
+                    if (setOpenAddStationModal) {
+                      setOpenAddStationModal(true);
+                    }
+                  }}
                 />
               ) : (
                 <Button
@@ -98,6 +108,14 @@ function Navbar() {
         onClose={() => {
           if (setOpenAuthModal) {
             setOpenAuthModal(false);
+          }
+        }}
+      />
+      <AddStation
+        open={openAddStationModal}
+        onClose={() => {
+          if (setOpenAddStationModal) {
+            setOpenAddStationModal(false);
           }
         }}
       />
