@@ -158,7 +158,11 @@ describe("authentication tests that require Database", () => {
   });
 
   afterAll(async () => {
-    await db.users.deleteMany({});
+    await db.users.deleteMany({
+      where:{
+        username:'testusername'
+      }
+    });
     await db.$disconnect();
   });
 });
