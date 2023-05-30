@@ -100,3 +100,17 @@ INSERT INTO journeys(departure_time,return_time,departure_station_id,departure_s
 SELECT departure_time,return_time,departure_station_id,departure_station_name,return_station_id,return_station_name,covered_distance,duration
 FROM temp_journeys;
 
+CREATE TABLE users (
+    id SERIAL NOT NULL PRIMARY KEY,
+    name VARCHAR ( 50 ) NOT NULL,
+	username VARCHAR (255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+ALTER TABLE users
+ADD CONSTRAINT username_unique UNIQUE (username);
+
+DROP TABLE temp_journeys;
+DROP TABLE temp_stations;
+
+
