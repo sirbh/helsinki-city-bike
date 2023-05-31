@@ -1,9 +1,12 @@
 import axios from 'axios';
 import {
   AuthDetails,
+  IAddStation,
+  IDeleteStationType,
   IJourneyAPIResponse,
   ISearchStation,
   ISingleStationAPIResponse,
+  IStation,
   IStationAPIResponse,
   LoginAPIResponse,
   User,
@@ -63,6 +66,27 @@ export const login = async (authDetails: AuthDetails) => {
   const { data } = await axios.post<LoginAPIResponse>(
     '/api/auth/login',
     authDetails
+  );
+  return data;
+};
+
+export const addStation = async (addStationDetails: IAddStation) => {
+  const { data } = await axios.post<IStation>(
+    '/api/stations',
+    addStationDetails.newStation,
+    {
+      headers: { Authorization: `Bearer ${addStationDetails.authToken}` },
+    }
+  );
+  return data;
+};
+
+export const deleteStation = async (deleteRequest: IDeleteStationType) => {
+  const { data } = await axios.delete(
+    `/api/stations/${deleteRequest.stationId}`,
+    {
+      headers: { Authorization: `Bearer ${deleteRequest.authToken}` },
+    }
   );
   return data;
 };
