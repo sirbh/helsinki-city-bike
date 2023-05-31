@@ -91,7 +91,7 @@ export default function AccountMenu({
           }}
         >
           <Avatar sx={{ width: 42, height: 42, bgcolor: deepPurple[500] }}>
-            {name.split('')[0]}
+            {name.split('')[0].toUpperCase()}
           </Avatar>
           <Typography variant="body1" textAlign="center">
             {name}
