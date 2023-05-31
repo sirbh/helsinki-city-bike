@@ -1,18 +1,22 @@
-import { ReactNode, createContext, useEffect, useState, useMemo } from 'react';
-import { LoginAPIResponse } from '../types';
+import { ReactNode, createContext, useState, useMemo } from 'react';
+import { UseMutateFunction } from '@tanstack/react-query';
+import { IAddStation, IStation } from '../types';
+import useAddStationMutation from '../hooks/useAddStationMutation';
 
 interface IStationContext {
-  //   userDetails: LoginAPIResponse | undefined;
-  //   setUserDetails: undefined | ((details: LoginAPIResponse | undefined) => void);
   openAddStationModal: boolean;
   setOpenAddStationModal: undefined | ((isOpen: boolean) => void);
   openConfirmModal: boolean;
   setOpenConfirmModal: undefined | ((isOpen: boolean) => void);
+  mutate:
+    | UseMutateFunction<IStation, unknown, IAddStation, unknown>
+    | undefined;
+  isLoading: boolean;
 }
 
 const StationContext = createContext<IStationContext>({
-  //   userDetails: undefined,
-  //   setUserDetails: undefined,
+  isLoading: false,
+  mutate: undefined,
   openAddStationModal: false,
   setOpenAddStationModal: undefined,
   openConfirmModal: false,
@@ -27,17 +31,15 @@ interface StationContextProviderProps {
 export function StationContextProvider({
   children,
 }: StationContextProviderProps) {
-  //   const [userDetails, setUserDetails] = useState<
-  //     LoginAPIResponse | undefined
-  //   >();
   const [openAddStationModal, setOpenAddStationModal] =
     useState<boolean>(false);
   const [openConfirmModal, setOpenConfirmModal] = useState<boolean>(false);
+  const { isLoading, mutate } = useAddStationMutation();
 
   const memoizedState = useMemo(
     () => ({
-      //   userDetails,
-      //   setUserDetails,
+      isLoading,
+      mutate,
       openAddStationModal,
       setOpenAddStationModal,
       openConfirmModal,
@@ -48,23 +50,10 @@ export function StationContextProvider({
       setOpenAddStationModal,
       openConfirmModal,
       setOpenConfirmModal,
+      isLoading,
+      mutate,
     ]
   );
-
-  //   useEffect(() => {
-  //     const user = localStorage.getItem('user');
-  //     if (user) {
-  //       setUserDetails(JSON.parse(user));
-  //     }
-  //   }, []);
-
-  //   useEffect(() => {
-  //     if (userDetails) {
-  //       localStorage.setItem('user', JSON.stringify(userDetails));
-  //     } else {
-  //       localStorage.removeItem('user');
-  //     }
-  //   }, [userDetails]);
 
   return (
     <StationContext.Provider value={memoizedState}>
