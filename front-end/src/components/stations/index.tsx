@@ -6,7 +6,6 @@ import SearchStationInput from '../station-search';
 import useSingleStationDetails from '../../hooks/useSingleStationDetails';
 import SingleStationModal from '../single-station-modal';
 import Error from '../error';
-import StationContext from '../../contexts/StationContext';
 import AuthContext from '../../contexts/AuthContext';
 
 function Stations() {
@@ -31,7 +30,10 @@ function Stations() {
         }}
         loading={singleStationLoading}
         stationDetails={singleStationDetails}
-        showDelete={!!userDetails}
+        showDelete={
+          !!userDetails &&
+          singleStationDetails?.details.users?.username === userDetails.username
+        }
       />
 
       <Box
