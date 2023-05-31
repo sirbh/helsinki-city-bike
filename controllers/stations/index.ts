@@ -1,6 +1,7 @@
 import { RequestHandler, Router } from "express";
 import { db } from "../../prisma";
 import {
+  TokenExtractor,
   ValidateStationAddRequest,
   ValidateStationsRequest,
   VlidateStationSearchRequest,
@@ -157,15 +158,49 @@ stationsRouter.get("/:id", (async (req, res, next) => {
 
 }) as RequestHandler);
 
-stationsRouter.post('/',ValidateStationAddRequest,(req,res,next)=>{
-   const stationDetails = addStationValidators.cast(req.query);
+stationsRouter.post('/',TokenExtractor,ValidateStationAddRequest,(req,res,next)=>{
+   const stationDetails = addStationValidators.cast(req.body);
+   const userid = parseInt(req.params.userid);
    db.stations.create({
-    data:stationDetails
+    data:{
+      ...stationDetails,
+      user_id:userid
+    }
    }).then(resp=>{
      res.status(200).send(resp);
    }).catch(err=>{
      next(err);
    });
+});
+
+stationsRouter.delete('/:id',TokenExtractor,(req,res,next)=>{
+  const id = parseInt(req.params.id);
+  const user_id = parseInt(req.params.userid);
+
+  // db.stations.deleteAll({
+  //   where:{
+  //     user_id,
+  //     id
+  //   }
+  // }).then(data=>{
+  //   return res.status(200).send('delete successful');
+  // }).catch(error={
+  //   next(error);
+  // });
+
+  db.stations.deleteMany({
+    where:{
+      AND:[{
+        user_id
+      },{
+        id
+      }]
+    }
+  }).then(_data=>{
+    return res.status(201).send('delete successful');
+  }).catch(error=>{
+    return next(error);
+  });
 });
 
 export default stationsRouter;

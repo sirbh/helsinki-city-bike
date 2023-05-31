@@ -16,7 +16,6 @@ authRouter.post("/register", ValidateCreateUserRequest, (async (
   next
 ) => {
   const { name, password, username } = userValidator.cast(req.body);
-
   const saltRounds = 10;
 
   try {
@@ -37,7 +36,6 @@ authRouter.post("/register", ValidateCreateUserRequest, (async (
     next(e);
   }
 }) as RequestHandler);
-
 authRouter.post("/login", ValidateLoginRequest, (async (req, res, next) => {
   const { username, password } = loginDetailsValidators.cast(req.body);
   try {
@@ -48,8 +46,7 @@ authRouter.post("/login", ValidateLoginRequest, (async (req, res, next) => {
     });
     const passwordCorrect =
       user === null ? false : await compare(password, user.password);
-    
-    console.log(user);
+
 
     if (!(user && passwordCorrect)) {
       return res.status(401).send("invalid username or password");
@@ -59,7 +56,7 @@ authRouter.post("/login", ValidateLoginRequest, (async (req, res, next) => {
       username: user.username,
       id: user.id,
     };
-
+    
     const token = jwt.sign(userForToken, process.env.SECRET || "secret");
     res.status(200).send({ token, username: user.username, name: user.name });
   } catch (error) {
