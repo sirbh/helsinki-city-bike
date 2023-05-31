@@ -84,6 +84,14 @@ stationsRouter.get("/:id", (async (req, res, next) => {
         where:{
           id:station_id
         },
+        include:{
+          users:{
+            select:{
+              name:true,
+              username:true
+            }
+          }
+        }
       }),
       db.journeys.count({
         where:{
@@ -176,17 +184,6 @@ stationsRouter.post('/',TokenExtractor,ValidateStationAddRequest,(req,res,next)=
 stationsRouter.delete('/:id',TokenExtractor,(req,res,next)=>{
   const id = parseInt(req.params.id);
   const user_id = parseInt(req.params.userid);
-
-  // db.stations.deleteAll({
-  //   where:{
-  //     user_id,
-  //     id
-  //   }
-  // }).then(data=>{
-  //   return res.status(200).send('delete successful');
-  // }).catch(error={
-  //   next(error);
-  // });
 
   db.stations.deleteMany({
     where:{
