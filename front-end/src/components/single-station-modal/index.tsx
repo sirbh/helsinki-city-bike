@@ -9,9 +9,12 @@ import {
   Typography,
 } from '@mui/material';
 import { Place } from '@mui/icons-material';
+import { useState, useContext } from 'react';
 import { ISingleStationAPIResponse } from '../../types';
 // import { IStationDetails } from '../../hooks/useStationDetails';
 import Mapview from '../map';
+import useDeleteStationMutation from '../../hooks/useDeleteStationMutation';
+import AuthContext from '../../contexts/AuthContext';
 
 interface ISingleStationModal {
   open: boolean;
@@ -28,10 +31,16 @@ function SingleStationModal({
   loading,
   showDelete,
 }: ISingleStationModal) {
+  const { mutate, isLoading } = useDeleteStationMutation();
+  const { userDetails } = useContext(AuthContext);
+  const [isDeleted, setIsDeleted] = useState<boolean>(false);
   return (
     <Modal
       open={open}
-      onClose={handleClose}
+      onClose={() => {
+        handleClose();
+        setIsDeleted(false);
+      }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
       sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
@@ -137,11 +146,32 @@ function SingleStationModal({
             </Box>
             {showDelete && (
               <Button
-                variant="contained"
+                onClick={() => {
+                  if (stationDetails?.details.id && userDetails) {
+                    mutate(
+                      {
+                        stationId: stationDetails?.details.id.toString(),
+                        authToken: userDetails.token,
+                      },
+                      {
+                        onSuccess: () => {
+                          setIsDeleted(true);
+                        },
+                      }
+                    );
+                  }
+                }}
+                disabled={isLoading || isDeleted}
+                endIcon={
+                  isLoading ? (
+                    <CircularProgress size="20px" color="inherit" />
+                  ) : undefined
+                }
+                variant={isDeleted ? 'outlined' : 'contained'}
                 color="error"
                 sx={{ position: 'absolute', top: '15px', right: '15px' }}
               >
-                Delete station
+                {isDeleted ? 'station deleted' : 'delete station'}
               </Button>
             )}
           </CardContent>
