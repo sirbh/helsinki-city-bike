@@ -144,7 +144,6 @@ export const TokenExtractor = (
   next: NextFunction
 ) => {
   const authorization = req.get("Authorization");
-  console.log(authorization);
   if (authorization && authorization.startsWith("Bearer ")) {
     const decodedToken = jwt.verify(
       authorization.replace("Bearer ", ""),
