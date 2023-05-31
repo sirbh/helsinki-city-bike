@@ -110,6 +110,13 @@ CREATE TABLE users (
 ALTER TABLE users
 ADD CONSTRAINT username_unique UNIQUE (username);
 
+ALTER TABLE stations  
+ADD COLUMN user_id INT;  
+
+ALTER TABLE stations  
+ADD CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id);
+
+
 DROP TABLE temp_journeys;
 DROP TABLE temp_stations;
 
