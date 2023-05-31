@@ -7,6 +7,8 @@ import {
   stationsSearchValidator,
   userValidator,
 } from "../util/validators";
+import jwt from "jsonwebtoken";
+import { db } from "../prisma";
 
 export const ValidateJourneyRequest = (
   req: Request,
@@ -77,7 +79,7 @@ export const ValidateStationAddRequest = (
   next: NextFunction
 ) => {
   addStationValidators
-    .validate(req.query)
+    .validate(req.body)
     .then((_result) => {
       next();
     })
@@ -91,40 +93,84 @@ export const ValidateCreateUserRequest = (
   _res: Response,
   next: NextFunction
 ) => {
-  console.log(req.body);
-  userValidator.validate(req.body).then((_result) => {
-    next();
-  }).catch(error=>{
-    next(error);
-  });
+  userValidator
+    .validate(req.body)
+    .then((_result) => {
+      next();
+    })
+    .catch((error) => {
+      next(error);
+    });
 };
 
 export const ValidateLoginRequest = (
   req: Request,
   _res: Response,
   next: NextFunction
-)=>{
-  loginDetailsValidators.validate(req.body).then(_result=>{
-    next();
-  }).catch(error=>{
-    next(error);
-  });
+) => {
+  loginDetailsValidators
+    .validate(req.body)
+    .then((_result) => {
+      next();
+    })
+    .catch((error) => {
+      next(error);
+    });
 };
 
 export const ErrorHandler: ErrorRequestHandler = (error, _req, _res, _next) => {
-  if (error.type === "optionality") {
+  if (
+    error.type === "required" ||
+    error.type === "min" ||
+    error.type === "typeError" ||
+    error.type === "integer"
+  ) {
+    return _res.status(403).send(error.errors[0]);
+  } else if (
+    error.type === "matches" ||
+    error.type === "len" ||
+    error.type === "optionality"
+  ) {
     return _res.status(403).send(error.message);
-  }
-  else if(error.type === "matches") {
-    return _res.status(403).send(error.message);
-  }
-  else if(error.type === "len") {
-    return _res.status(403).send(error.message);
-  }
-  else if(error.code === "P2002") {
+  } else if (error.code === "P2002") {
     return _res.status(403).send("username already exits");
   }
   return _res.status(400).send("server could not handle the request");
 };
 
+export const TokenExtractor = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const authorization = req.get("Authorization");
+  console.log(authorization);
+  if (authorization && authorization.startsWith("Bearer ")) {
+    const decodedToken = jwt.verify(
+      authorization.replace("Bearer ", ""),
+      process.env.SECRET || "secret"
+    ) as { username: string; id: string };
 
+
+    db.users
+      .findFirst({
+        where: {
+          username: decodedToken.username,
+        },
+      })
+      .then((data) => {
+        if (data) {
+          req.params.username = data.username;
+          req.params.userid = data.id.toString();
+          next();
+        } else {
+          return res.status(401).send("invalid credentials");
+        }
+      })
+      .catch((err) => {
+        next(err);
+      });
+  } else {
+    return res.status(401).send("token invalid");
+  }
+};
