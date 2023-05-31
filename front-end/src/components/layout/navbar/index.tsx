@@ -2,7 +2,7 @@ import { PedalBike } from '@mui/icons-material';
 import Box from '@mui/material/Box';
 import { AppBar, Container, Toolbar, Typography } from '@mui/material';
 import Button from '@mui/material/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useContext } from 'react';
 import Auth from '../../auth';
 import AccountMenu from '../../menu';
@@ -21,7 +21,6 @@ function Navbar() {
     useContext(AuthContext);
   const { openAddStationModal, setOpenAddStationModal } =
     useContext(StationContext);
-  const navigate = useNavigate();
 
   return (
     <>
