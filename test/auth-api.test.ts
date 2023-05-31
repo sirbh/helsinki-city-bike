@@ -2,7 +2,6 @@ import supertest from "supertest";
 import app from "../app";
 import { afterAll, expect } from "@jest/globals";
 import { db } from "../prisma";
-import { hash } from "bcrypt";
 
 const api = supertest(app);
 
@@ -84,17 +83,6 @@ test("if login fails if username or password is not provided", async () => {
 });
 
 describe("authentication tests that require Database", () => {
-  beforeEach(async () => {
-    await db.users.deleteMany({});
-    const passwordHash = await hash("password!2A", 10);
-    await db.users.create({
-      data: {
-        name: "tempuser",
-        username: "tempusername",
-        password: passwordHash,
-      },
-    });
-  });
 
   test("if user registeration api fails if unique username is not given", async () => {
     await api

@@ -350,7 +350,7 @@ describe("test that require db access", () => {
       capacity: 4,
       x: "4",
       y: "4",
-      user_id: 130,
+      user_id: 173,
     });
   });
 
