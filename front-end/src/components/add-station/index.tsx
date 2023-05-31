@@ -1,14 +1,8 @@
-import { Height, Image } from '@mui/icons-material';
 import {
-  Box,
-  Button,
   Card,
   CardContent,
   CardHeader,
-  CardMedia,
-  Grid,
   Modal,
-  TextField,
   Typography,
 } from '@mui/material';
 import AddStationForm from './add-station-form';
@@ -81,15 +75,6 @@ function AddStation({ open, onClose }: AddStationProps) {
           }}
         >
           <AddStationForm />
-          {/* <TextField label="name" sx={{ width: '100%' }} />
-          <TextField label="capacity" sx={{ width: '100%' }} />
-          <TextField label="city" sx={{ width: '100%' }} />
-          <TextField label="address" sx={{ width: '100%' }} />
-          <TextField label="longitude" sx={{ width: '30%' }} />
-          <TextField label="latitude" sx={{ width: '30%' }} />
-          <Button fullWidth variant="contained">
-            Submit
-          </Button> */}
         </CardContent>
       </Card>
     </Modal>
