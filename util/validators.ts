@@ -34,23 +34,23 @@ export const jourenyRequestValidators = object({
 
 export const addStationValidators = object({
   name: string()
-    .required("name is required is field")
-    .test("len", "should be more than 3 characters", (val) => val.length > 3),
+    .required("name is required field")
+    .test("len", "name should be more than 3 characters", (val) => val.length >= 3),
   address: string()
     .required("address is required field")
-    .test("len", "should be more than 3 characters", (val) => val.length > 3),
+    .test("len", "address should be more than 3 characters", (val) => val.length >= 3),
   city: string()
     .required("city is required field")
-    .test("len", "should be more than 3 characters", (val) => val.length > 3),
+    .test("len", "city should be more than 3 characters", (val) => val.length >= 3),
   operator: string()
     .required("operator is required field")
-    .test("len", "should be more than 3 characters", (val) => val.length > 3),
-  capacity: number()
-    .integer()
-    .min(1, "should more than 0")
+    .test("len", "operator should be more than 3 characters", (val) => val.length >= 3),
+  capacity: number().typeError('capacity should be a number')
+    .integer('capacity should be a integer')
+    .min(1, "capacity should be more than 0")
     .required("capacity is required field"),
-  x: number().required("lat is required"),
-  y: number().required("long is required"),
+  x: number().typeError('lat should be a number').required("lat is required"),
+  y: number().typeError('long should be a number').required("long is required"),
 });
 
 export const stationRequestValidators = object({
