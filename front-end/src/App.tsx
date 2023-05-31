@@ -7,13 +7,13 @@ import './App.css';
 function App() {
   const queryClient = new QueryClient();
   return (
-    <StationContextProvider>
-      <AuthContextProvider>
-        <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <StationContextProvider>
+        <AuthContextProvider>
           <Layout />
-        </QueryClientProvider>
-      </AuthContextProvider>
-    </StationContextProvider>
+        </AuthContextProvider>
+      </StationContextProvider>
+    </QueryClientProvider>
   );
 }
 
