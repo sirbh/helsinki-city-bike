@@ -7,18 +7,19 @@ import {
   Grid,
 } from '@mui/material';
 import { Formik } from 'formik';
-import { object, string, ref, number } from 'yup';
+import { object, string, number } from 'yup';
 import { useContext, useState } from 'react';
 import { AxiosError } from 'axios';
-import useCreateUserMutation from '../../../hooks/useCreateUserMutation';
 import { Message } from '../../../types';
-import useLoginMutation from '../../../hooks/useLoginMutation';
 import AuthContext from '../../../contexts/AuthContext';
+import StationContext from '../../../contexts/StationContext';
 
 function AddStationForm() {
   // const { mutate, isLoading } = useCreateUserMutation();
   // const { mutate: loginMutation, isLoading: loginLoading } = useLoginMutation();
   // const { setOpenAuthModal, setUserDetails } = useContext(AuthContext);
+  const { mutate, isLoading } = useContext(StationContext);
+  const { userDetails } = useContext(AuthContext);
   const [formMessage, setFormMessage] = useState<Message | undefined>();
   return (
     <Formik
@@ -33,7 +34,40 @@ function AddStationForm() {
         city: '',
       }}
       onSubmit={(values) => {
-        console.log(values);
+        if (mutate && userDetails) {
+          mutate(
+            {
+              newStation: {
+                name: values.name,
+                x: parseInt(values.latitude, 10),
+                y: parseInt(values.longitude, 10),
+                operator: 'CityBike Finland',
+                address: values.address,
+                capacity: parseInt(values.capacity, 10),
+                city: 'Espoo',
+              },
+              authToken: userDetails?.token,
+            },
+            {
+              onSuccess: (result) => {
+                setFormMessage({
+                  type: 'info',
+                  message: `${result.name} added successfully`,
+                });
+              },
+              onError: (error) => {
+                const { response } = error as AxiosError;
+                setFormMessage({
+                  type: 'error',
+                  message: response?.data as string,
+                });
+                setTimeout(() => {
+                  setFormMessage(undefined);
+                }, 10000);
+              },
+            }
+          );
+        }
       }}
       validationSchema={object({
         name: string()
@@ -69,7 +103,7 @@ function AddStationForm() {
           .required('required'),
       })}
     >
-      {({ getFieldProps, handleSubmit, errors }) => (
+      {({ getFieldProps, handleSubmit, errors, resetForm }) => (
         <Box
           sx={{
             '> *': {
@@ -138,8 +172,15 @@ function AddStationForm() {
               <Button
                 fullWidth
                 variant="contained"
+                disabled={isLoading}
+                endIcon={
+                  isLoading ? (
+                    <CircularProgress size="20px" color="inherit" />
+                  ) : undefined
+                }
                 onClick={() => {
                   handleSubmit();
+                  resetForm();
                 }}
               >
                 Submit
