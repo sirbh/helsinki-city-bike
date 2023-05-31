@@ -78,6 +78,7 @@ export const ValidateStationAddRequest = (
   _res: Response,
   next: NextFunction
 ) => {
+  console.log(req.body);
   addStationValidators
     .validate(req.body)
     .then((_result) => {
