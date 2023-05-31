@@ -35,6 +35,19 @@ export interface IStation {
   capacity: number;
   x: number;
   y: number;
+  users: null | Omit<User, 'password'>;
+}
+
+export type NewStationType = Omit<IStation, 'id' | 'users'>;
+
+export interface IAddStation {
+  authToken: string;
+  newStation: NewStationType;
+}
+
+export interface IDeleteStationType {
+  stationId: string;
+  authToken: string;
 }
 
 export interface IStationAPIResponse {
