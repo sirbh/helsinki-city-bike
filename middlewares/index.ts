@@ -78,7 +78,6 @@ export const ValidateStationAddRequest = (
   _res: Response,
   next: NextFunction
 ) => {
-  console.log(req.body);
   addStationValidators
     .validate(req.body)
     .then((_result) => {
@@ -120,7 +119,6 @@ export const ValidateLoginRequest = (
 };
 
 export const ErrorHandler: ErrorRequestHandler = (error, _req, _res, _next) => {
-  console.log(error);
   if (
     error.type === "required" ||
     error.type === "min" ||

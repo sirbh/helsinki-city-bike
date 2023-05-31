@@ -15,9 +15,6 @@ import AuthContext from '../../../contexts/AuthContext';
 import StationContext from '../../../contexts/StationContext';
 
 function AddStationForm() {
-  // const { mutate, isLoading } = useCreateUserMutation();
-  // const { mutate: loginMutation, isLoading: loginLoading } = useLoginMutation();
-  // const { setOpenAuthModal, setUserDetails } = useContext(AuthContext);
   const { mutate, isLoading } = useContext(StationContext);
   const { userDetails } = useContext(AuthContext);
   const [formMessage, setFormMessage] = useState<Message | undefined>();
@@ -33,7 +30,7 @@ function AddStationForm() {
         capacity: '',
         city: '',
       }}
-      onSubmit={(values) => {
+      onSubmit={(values, { resetForm }) => {
         if (mutate && userDetails) {
           mutate(
             {
@@ -54,6 +51,7 @@ function AddStationForm() {
                   type: 'info',
                   message: `${result.name} added successfully`,
                 });
+                resetForm();
               },
               onError: (error) => {
                 const { response } = error as AxiosError;
@@ -103,7 +101,7 @@ function AddStationForm() {
           .required('required'),
       })}
     >
-      {({ getFieldProps, handleSubmit, errors, resetForm }) => (
+      {({ getFieldProps, handleSubmit, errors }) => (
         <Box
           sx={{
             '> *': {
@@ -180,7 +178,6 @@ function AddStationForm() {
                 }
                 onClick={() => {
                   handleSubmit();
-                  resetForm();
                 }}
               >
                 Submit
