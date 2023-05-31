@@ -4,5 +4,6 @@ describe("layout should have all the routes", () => {
     cy.contains("citybike", { matchCase: false });
     cy.contains("stations", { matchCase: false });
     cy.contains("journeys", { matchCase: false });
+    cy.contains("login",{matchCase:false});
   });
 });
