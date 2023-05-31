@@ -28,11 +28,14 @@ model stations {
   capacity Int
   x        Decimal @db.Decimal
   y        Decimal @db.Decimal
+  user_id  Int?
+  users    users?  @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "fk_user")
 }
 
 model users {
-  id       Int    @id @default(autoincrement())
-  name     String @db.VarChar(50)
-  username String @unique(map: "username_unique") @db.VarChar(255)
-  password String @db.VarChar(255)
+  id       Int        @id @default(autoincrement())
+  name     String     @db.VarChar(50)
+  username String     @unique(map: "username_unique") @db.VarChar(255)
+  password String     @db.VarChar(255)
+  stations stations[]
 }
