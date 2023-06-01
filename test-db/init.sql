@@ -58,3 +58,28 @@ COPY public.stations (id, name, address, city, operator, capacity, x, y) FROM st
 547	Jämeräntaival	Otsvängen 18	Espoo	CityBike Finland	30	24.83503300000000	60.18811800000000
 541	Aalto University (M), Korkeakoulua	Otnäsvägen 10	Espoo	CityBike Finland	42	24.82667100000000	60.18431200000000
 \.
+
+CREATE TABLE users (
+    id INT PRIMARY KEY,
+    name VARCHAR ( 50 ) NOT NULL,
+	username VARCHAR (255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+
+INSERT INTO users(id, name, username, password)
+VALUES (173,'tempuser','tempusername','$2b$10$p3BEdJOfngs6EMLrLPu6RusSaD.t2tzIgR9x1dLqWj0.DQbWFYa3.');
+
+ALTER TABLE users
+ADD CONSTRAINT username_unique UNIQUE (username);
+
+ALTER TABLE stations  
+ADD COLUMN user_id INT; 
+
+ALTER TABLE stations  
+ADD CONSTRAINT fk_user FOREIGN KEY(user_id) REFERENCES users(id);
+
+CREATE SEQUENCE station_seq START WITH 548;
+ALTER TABLE stations ALTER COLUMN id SET DEFAULT nextval('station_seq');
+
+CREATE SEQUENCE user_seq START WITH 548;
+ALTER TABLE users ALTER COLUMN id SET DEFAULT nextval('user_seq');
