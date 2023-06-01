@@ -395,5 +395,6 @@ describe("test that require db access", () => {
         id: 1,
       },
     });
+    await db.$disconnect();
   });
 });
