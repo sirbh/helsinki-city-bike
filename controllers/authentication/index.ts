@@ -4,7 +4,7 @@ import {
   ValidateLoginRequest,
 } from "../../middlewares";
 import { loginDetailsValidators, userValidator } from "../../util/validators";
-import { hash, compare } from "bcrypt";
+import { hash, compare } from "bcryptjs";
 import { db } from "../../prisma";
 import jwt from "jsonwebtoken";
 
