@@ -146,6 +146,7 @@ function AddStationForm() {
                 fullWidth
                 error={!!errors.latitude}
                 helperText={errors.latitude}
+                type='number'
               />
             </Grid>
             <Grid item xs={4}>
@@ -155,6 +156,7 @@ function AddStationForm() {
                 fullWidth
                 error={!!errors.longitude}
                 helperText={errors.longitude}
+                type='number'
               />
             </Grid>
             <Grid item xs={4}>
@@ -164,6 +166,7 @@ function AddStationForm() {
                 fullWidth
                 error={!!errors.capacity}
                 helperText={errors.capacity}
+                type='number'
               />
             </Grid>
             <Grid item xs={12}>
