@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { Place } from '@mui/icons-material';
 import { useState, useContext } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
 import { ISingleStationAPIResponse } from '../../types';
 // import { IStationDetails } from '../../hooks/useStationDetails';
 import Mapview from '../map';
@@ -34,6 +35,7 @@ function SingleStationModal({
   const { mutate, isLoading } = useDeleteStationMutation();
   const { userDetails } = useContext(AuthContext);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
+  const queryClient = useQueryClient();
   return (
     <Modal
       open={open}
@@ -156,6 +158,9 @@ function SingleStationModal({
                       {
                         onSuccess: () => {
                           setIsDeleted(true);
+                          queryClient.invalidateQueries({
+                            queryKey: ['stations'],
+                          });
                         },
                       }
                     );

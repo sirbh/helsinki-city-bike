@@ -10,6 +10,7 @@ import { Formik } from 'formik';
 import { object, string, number } from 'yup';
 import { useContext, useState } from 'react';
 import { AxiosError } from 'axios';
+import { useQueryClient } from '@tanstack/react-query';
 import { Message } from '../../../types';
 import AuthContext from '../../../contexts/AuthContext';
 import StationContext from '../../../contexts/StationContext';
@@ -18,6 +19,7 @@ function AddStationForm() {
   const { mutate, isLoading } = useContext(StationContext);
   const { userDetails } = useContext(AuthContext);
   const [formMessage, setFormMessage] = useState<Message | undefined>();
+  const queryClient = useQueryClient();
   return (
     <Formik
       validateOnChange={false}
@@ -52,6 +54,7 @@ function AddStationForm() {
                   message: `${result.name} added successfully`,
                 });
                 resetForm();
+                queryClient.invalidateQueries({ queryKey: ['stations'] });
               },
               onError: (error) => {
                 const { response } = error as AxiosError;
