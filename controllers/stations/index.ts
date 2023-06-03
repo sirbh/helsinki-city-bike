@@ -16,18 +16,31 @@ import {
 const stationsRouter = Router();
 
 stationsRouter.get("/", ValidateStationsRequest, (async (req, res, next) => {
-  const { take, page } = stationRequestValidators.cast({
+  const { take, page, username} = stationRequestValidators.cast({
     take: req.query.take,
     page: req.query.page,
+    username:req.query.username
   });
 
+  console.log(username);
   try {
     const stationDetails = await db.$transaction([
       db.stations.findMany({
         take: take,
         skip: take * (page - 1),
+        where:{
+          users:{
+            username:username
+          }
+        }
       }),
-      db.stations.count({}),
+      db.stations.count({
+        where:{
+          users:{
+            username:username
+          }
+        }
+      }),
     ]);
 
     res.status(200).send({
@@ -167,6 +180,9 @@ stationsRouter.get("/:id", (async (req, res, next) => {
 }) as RequestHandler);
 
 stationsRouter.post('/',TokenExtractor,ValidateStationAddRequest,(req,res,next)=>{
+   if(!req.params.userid){
+    return res.status(401).send("token invalid");
+   }
    const stationDetails = addStationValidators.cast(req.body);
    const userid = parseInt(req.params.userid);
    db.stations.create({
@@ -182,6 +198,9 @@ stationsRouter.post('/',TokenExtractor,ValidateStationAddRequest,(req,res,next)=
 });
 
 stationsRouter.delete('/:id',TokenExtractor,(req,res,next)=>{
+  if(!req.params.userid){
+    return res.status(401).send("token invalid");
+   }
   const id = parseInt(req.params.id);
   const user_id = parseInt(req.params.userid);
 
