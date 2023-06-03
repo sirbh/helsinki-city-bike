@@ -21,8 +21,6 @@ stationsRouter.get("/", ValidateStationsRequest, (async (req, res, next) => {
     page: req.query.page,
     username:req.query.username
   });
-
-  console.log(username);
   try {
     const stationDetails = await db.$transaction([
       db.stations.findMany({
