@@ -42,22 +42,18 @@ function AddStation({ open, onClose }: AddStationProps) {
           title="Add Station"
           titleTypographyProps={{
             sx: {
-              // fontSize: '1.25rem',
               marginBottom: '20px',
               display: 'inline',
-              // width: '17rem',
             },
             variant: 'h4',
           }}
           sx={{
             backgroundColor: (theme) => theme.palette.primary.main,
-            // width: '350px',
             position: 'relative',
             color: 'white',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'start',
-            // paddingTop: '30px',
           }}
           subheader={
             <Typography color="white">Enter Details Of New Station</Typography>
@@ -70,7 +66,6 @@ function AddStation({ open, onClose }: AddStationProps) {
             color: 'black',
             '> *': {
               marginBottom: '10px',
-              // marginRight: '5px',
             },
           }}
         >

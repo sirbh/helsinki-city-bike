@@ -171,7 +171,6 @@ export const TokenExtractor = (
         next(err);
       });
   } else {
-    // return res.status(401).send("token invalid");
     next();
   }
 };

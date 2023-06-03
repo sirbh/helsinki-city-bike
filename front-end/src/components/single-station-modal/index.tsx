@@ -12,7 +12,6 @@ import { Place } from '@mui/icons-material';
 import { useState, useContext } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { ISingleStationAPIResponse } from '../../types';
-// import { IStationDetails } from '../../hooks/useStationDetails';
 import Mapview from '../map';
 import useDeleteStationMutation from '../../hooks/useDeleteStationMutation';
 import AuthContext from '../../contexts/AuthContext';

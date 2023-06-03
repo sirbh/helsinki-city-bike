@@ -55,7 +55,6 @@ function Auth({ open, onClose }: AuthProps) {
           }
           titleTypographyProps={{
             sx: {
-              // fontSize: '1.25rem',
               marginBottom: '20px',
               width: '17rem',
             },
@@ -63,7 +62,6 @@ function Auth({ open, onClose }: AuthProps) {
           }}
           sx={{
             backgroundColor: (theme) => theme.palette.primary.main,
-            // width: '350px',
             position: 'relative',
             color: 'white',
             display: 'flex',
@@ -85,7 +83,6 @@ function Auth({ open, onClose }: AuthProps) {
                   color: 'white',
                   position: 'absolute',
                   bottom: 30,
-                  // backgroundColor: 'white',
                 }}
               />
             </>

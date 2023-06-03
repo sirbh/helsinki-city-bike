@@ -27,7 +27,6 @@ describe("station modal tests", () => {
     });
 
     it("should be able to successfully add new station if provided with correct details and delete it",()=>{
-        // cy.contains('Submit').click();
         cy.get('div.MuiCardContent-root').within(()=>{
             cy.get('input[name="name"]').type('some place');
             cy.get('input[name="address"]').type('45 some address');

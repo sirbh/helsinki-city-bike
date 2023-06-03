@@ -25,7 +25,6 @@ const StationContext = createContext<IStationContext>({
 
 interface StationContextProviderProps {
   children: ReactNode;
-  // any props that come into the component
 }
 
 export function StationContextProvider({

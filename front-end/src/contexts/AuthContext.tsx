@@ -17,7 +17,6 @@ const AuthContext = createContext<IAuthContext>({
 
 interface AuthContextProviderProps {
   children: ReactNode;
-  // any props that come into the component
 }
 
 export function AuthContextProvider({ children }: AuthContextProviderProps) {

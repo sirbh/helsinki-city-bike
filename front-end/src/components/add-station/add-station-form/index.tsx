@@ -134,7 +134,6 @@ function AddStationForm() {
             <Grid item xs={4}>
               <TextField
                 label="city"
-                // {...getFieldProps('city')}
                 fullWidth
                 error={!!errors.city}
                 helperText={errors.city}

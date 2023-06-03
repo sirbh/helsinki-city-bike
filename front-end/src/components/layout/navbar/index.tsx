@@ -16,7 +16,6 @@ function Navbar() {
     { name: 'Stations', route: '/stations' },
   ];
 
-  // const [openLoginModal, setOpenLoginModal] = useState(false);
   const { userDetails, openAuthModal, setOpenAuthModal } =
     useContext(AuthContext);
   const { openAddStationModal, setOpenAddStationModal } =
