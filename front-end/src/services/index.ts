@@ -34,9 +34,15 @@ export const searchStation = async (query: string) => {
   return data;
 };
 
-export const getStations = async (page: number, take: number) => {
+export const getStations = async (
+  page: number,
+  take: number,
+  username?: string
+) => {
   const { data } = await axios.get<IStationAPIResponse>(
-    `/api/stations?page=${page}&take=${take}`
+    `/api/stations?page=${page}&take=${take}${
+      username ? `&username=${username}` : ''
+    }`
   );
   return data;
 };
