@@ -55,7 +55,8 @@ License and Other helpful info:
 * Dockerization of app
 * Authentication
 * Implemented E2E tests
-* Created UI for bicycle stations
+* UI for Adding bicycle stations
+* Station deletion by user who created it
 
 ## Deployment 
 
@@ -93,6 +94,7 @@ CI pipeline has been setup using github actions: https://github.com/sirbh/helsin
 ## Running the app
 
 Docker can be used to setup the dev environment. Make sure you have docker installed and running.
+Sql script is present in `db/init.sql` which perform validation on data before presenting.
 
 First copy following files in `db/files` of project root.
 - https://dev.hsl.fi/citybikes/od-trips-2021/2021-05.csv
@@ -106,11 +108,11 @@ To start dev server simply run the following command in terminal opened in root 
 docker compose -f docker-compose.dev.yml up
 ```
 after running the above command the app will be live on `http://localhost:3000/`
-stop and rerun backend container if app shows error message.
+-stop and rerun backend container if app shows error message.
 
 ## Running the tests
 
-Again for testing separate docker file has been created. To run the test simply run the following command in the root.
+For testing separate docker file has been created. To run the test simply run the following command in the root.
 
 ```
 docker compose -f docker-compose.test.yml up -d
@@ -124,10 +126,14 @@ docker exec -it backend-test bash
 
 After running above command you can access the terminal to the already running backend server 
 
-Unit test can be run by `npm run test` 
-End-to-end test can be run by `npm run test:e2e`
+-Unit test can be run by `npm run test` 
+-End-to-end test can be run by `npm run test:e2e`
 
+There is a sql file in `test-db/init.sql` which add few records of data required for testing.
+Output of both the test command can also be viewed on github action page.
 
+## time keeping
+-https://github.com/sirbh/helsinki-city-bike/blob/master/timeKeeping.md
 
 ## Further scope of improvements
 I plan to further enhance this application; however, I have already invested over 175 hours in its development, and therefore, I am submitting it.
