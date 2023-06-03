@@ -47,6 +47,7 @@ export const ValidateStationsRequest = (
     .validate({
       take: req.query.take,
       page: req.query.page,
+      username:req.query.username
     })
     .then((_result) => {
       next();
@@ -170,6 +171,7 @@ export const TokenExtractor = (
         next(err);
       });
   } else {
-    return res.status(401).send("token invalid");
+    // return res.status(401).send("token invalid");
+    next();
   }
 };
