@@ -1,4 +1,4 @@
-import { Box, LinearProgress } from '@mui/material';
+import { Box, LinearProgress, Checkbox, FormControlLabel } from '@mui/material';
 import { useState, useContext } from 'react';
 import useStationDetails from '../../hooks/useStationDetails';
 import StationTable from './table';
@@ -10,7 +10,8 @@ import AuthContext from '../../contexts/AuthContext';
 
 function Stations() {
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const { data, page, isLoading, setPage, isError } = useStationDetails();
+  const { data, page, isLoading, setPage, isError, setUsername } =
+    useStationDetails();
   const {
     data: singleStationDetails,
     isLoading: singleStationLoading,
@@ -39,9 +40,11 @@ function Stations() {
       <Box
         sx={{
           display: 'flex',
+          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
           marginTop: '2rem',
+          marginBottom: '2rem',
         }}
       >
         <SearchStationInput
@@ -50,6 +53,22 @@ function Stations() {
             setModalOpen(!!_res?.id);
           }}
         />
+        {userDetails && (
+          <FormControlLabel
+            control={
+              <Checkbox
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setUsername(userDetails.username);
+                  } else {
+                    setUsername(undefined);
+                  }
+                }}
+              />
+            }
+            label="Show Stations Added By You"
+          />
+        )}
       </Box>
       {isLoading ? (
         <LinearProgress />
