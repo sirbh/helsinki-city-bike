@@ -108,7 +108,7 @@ To start dev server simply run the following command in terminal opened in root 
 docker compose -f docker-compose.dev.yml up
 ```
 after running the above command the app will be live on `http://localhost:3000/`
--stop and rerun backend container if app shows error message.
+- stop and rerun backend container if app shows error message.
 
 ## Running the tests
 
@@ -126,8 +126,8 @@ docker exec -it backend-test bash
 
 After running above command you can access the terminal to the already running backend server 
 
--Unit test can be run by `npm run test` 
--End-to-end test can be run by `npm run test:e2e`
+- Unit test can be run by `npm run test` 
+- End-to-end test can be run by `npm run test:e2e`
 
 There is a sql file in `test-db/init.sql` which add few records of data required for testing.
 Output of both the test command can also be viewed on github action page.
