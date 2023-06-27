@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { getJourneyDetails } from '../services';
+import { getJourneyDetails } from '../services/journeys';
 
 const useJourneyDetails = () => {
   const [page, setPage] = useState<number>(1);

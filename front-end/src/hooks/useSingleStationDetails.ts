@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
-import { getSingleStation } from '../services';
+import { getSingleStation } from '../services/stations';
 
 const useSingleStationDetails = () => {
   const [id, setId] = useState<string>('');

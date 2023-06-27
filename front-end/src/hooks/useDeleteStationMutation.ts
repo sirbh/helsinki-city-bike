@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { deleteStation } from '../services';
+import { deleteStation } from '../services/stations';
 
 const useDeleteStationMutation = () => {
   const { mutate, isLoading } = useMutation({
