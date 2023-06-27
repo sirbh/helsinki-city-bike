@@ -90,7 +90,7 @@ function AddStationForm() {
           .required('required')
           .test(
             'len',
-            'password must be more than 7 chars',
+            'address must be more than 3 chars',
             (val) => val.length >= 3
           ),
         latitude: number().typeError('should be a number').required('required'),
