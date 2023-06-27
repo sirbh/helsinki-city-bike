@@ -5,8 +5,10 @@ WORKDIR /usr/src/app
 COPY --chown=node:node . .
 RUN npm ci
 RUN npm run tsc 
+RUN rm -r cypress
 RUN npm --prefix ./front-end install
 RUN npm run build:ui
+
 
 ENV PORT=3000
 
