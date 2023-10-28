@@ -102,7 +102,7 @@ First copy following files in `db/files` of project root.
 - https://dev.hsl.fi/citybikes/od-trips-2021/2021-07.csv
 - https://opendata.arcgis.com/datasets/726277c507ef4914b0aec3cbcfcbfafc_0.csv (rename this file to stations.csv)
 
-To start dev server simply run the following command in terminal opened in root of project directory:
+To start dev server simply run the following command in terminal opened in root of project directory:-
 
 ```
 docker compose -f docker-compose.dev.yml up
