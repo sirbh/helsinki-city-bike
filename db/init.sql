@@ -11,7 +11,9 @@ CREATE TABLE temp_stations (
     operator VARCHAR (255),
     capacity INT,
     x DECIMAL,
-    y DECIMAL
+    y DECIMAL,
+    x2 DECIMAL,
+    y2 DECIMAL
 );
 
 CREATE TABLE temp_journeys (
